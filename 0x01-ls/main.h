@@ -4,6 +4,8 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 
 typedef struct parsedCommandLine {
     char option_a;
@@ -13,9 +15,8 @@ typedef struct parsedCommandLine {
     char **items;
 } parsedCmdLine;
 
+int mystrcmp(char *s1, char *s2);
 void listFiles(const char* dirname);
-int _strcmp(char *s1, char *s2);
 
 
-
-#endif
+#endif /* MAIN_H */

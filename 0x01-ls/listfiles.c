@@ -9,7 +9,7 @@ void listFiles(const char* dirname) {
     struct dirent* entity;
     entity = readdir(dir);
     while (entity != NULL) {
-        if (_strcmp(entity->d_name, ".") != 0 && _strcmp(entity->d_name, "..") != 0)
+        if (mystrcmp(entity->d_name, ".") != 0 && mystrcmp(entity->d_name, "..") != 0)
             printf("%s ", entity->d_name);
 
         entity = readdir(dir);
