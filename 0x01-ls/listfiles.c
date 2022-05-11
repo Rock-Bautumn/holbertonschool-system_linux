@@ -2,11 +2,12 @@
 
 void listFiles(const char* dirname) {
     DIR* dir = opendir(dirname);
+
+    struct dirent* entity;
+
     if (dir == NULL) {
         return;
     }
-
-    struct dirent* entity;
     entity = readdir(dir);
     while (entity != NULL) {
         if (mystrcmp(entity->d_name, ".") != 0 && mystrcmp(entity->d_name, "..") != 0)
