@@ -35,9 +35,10 @@ void check_racer_id(int id)
 	
 	static racer **racer_head;
 
-	racer *thisRacer = racer_head;
+	racer *thisRacer = *racer_head;
 	int match = 0;
 	racer *newRacer;
+
 
 	while (thisRacer->next != NULL)
 	{
