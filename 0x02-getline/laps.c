@@ -1,5 +1,11 @@
 #include "laps.h"
 
+/**
+ * free_racers - Deallocates all of the racers from memory
+ * @racer_head: The head node of the racer linked list
+ * Return: void
+*/
+
 void free_racers(racer *racer_head)
 {
 
@@ -16,6 +22,12 @@ void free_racers(racer *racer_head)
 
 }
 
+/**
+ * print_race_state - prints the status of the race to console
+ * @racer_head: The head node of the racer linked list
+ * Return: void
+*/
+
 void print_race_state(racer **racer_head)
 {
 
@@ -28,6 +40,13 @@ void print_race_state(racer **racer_head)
 		thisRacer = thisRacer->next;
 	}
 }
+
+/**
+ * check_racer_id - checks if the ID exists in the racer linked list
+ * @racer_head: The head node of the racer linked list
+ * @id: the ID of the car
+ * Return: void
+*/
 
 void check_racer_id(racer **racer_head, int id)
 {
@@ -67,29 +86,42 @@ void check_racer_id(racer **racer_head, int id)
 	prevRacer->next = new_car(id);
 }
 
+/**
+ * new_car - creates a new racer linked list node
+ * @id: the ID of the car
+ * Return: the address of a the new car node
+*/
+
 racer *new_car(int id)
 {
 	racer *newRacer;
 
 	newRacer = malloc(sizeof(racer));
 	if (newRacer == NULL)
-		return NULL;
-	
+		return (NULL);
+
 	newRacer->next = NULL;
 	newRacer->laps = 0;
 	newRacer->id = id;
 	printf("Car %d joined the race\n", newRacer->id);
 
-	return newRacer;
+	return (newRacer);
 
 }
 
+/**
+ * race_state - updates and prints out the race state, updating
+ * the number of laps for each id included in the array
+ * @id: an array of car IDs
+ * @size: the size of the array of IDs
+ * Return: void
+*/
+
 void race_state(int *id, size_t size)
 {
-	static racer *racer_head = NULL;
+	static racer *racer_head;
 	unsigned int i = 0;
 
-	
 	(void) racer_head;
 	if (size == 0)
 	{
