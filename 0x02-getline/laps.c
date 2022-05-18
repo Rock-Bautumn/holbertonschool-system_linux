@@ -1,13 +1,12 @@
 #include "laps.h"
 
-void free_racers(void)
+void free_racers(racer *racer_head)
 {
-	static racer *racer_head;
 
 	racer *thisRacer = racer_head;
 	racer *freeRacer;
 
-	while (thisRacer->next != NULL)
+	while (thisRacer)
 	{
 		printf("Freeing car %d\n", thisRacer->id);
 		freeRacer = thisRacer;
@@ -17,55 +16,71 @@ void free_racers(void)
 
 }
 
-void print_race_state(void)
+void print_race_state(racer **racer_head)
 {
-	static racer **racer_head;
 
 	racer *thisRacer = *racer_head;
 
-	while (thisRacer->next != NULL)
+	printf("Race state:\n");
+	while (thisRacer)
 	{
 		printf("Car %d [%d laps]\n", thisRacer->id, thisRacer->laps);
 		thisRacer = thisRacer->next;
 	}
 }
 
-void check_racer_id(int id)
+void check_racer_id(racer **racer_head, int id)
 {
-	
-	static racer **racer_head;
-
 	racer *thisRacer = *racer_head;
-	int match = 0;
-	racer *newRacer;
+	racer *prevRacer = NULL;
+	racer *tempRacer = NULL;
 
+	if (*racer_head == NULL)
+	{
+		*racer_head = new_car(id);
+		return;
+	}
 
-	while (thisRacer->next != NULL)
+	while (thisRacer)
 	{
 		if (thisRacer->id == id)
 		{
 			thisRacer->laps++;
-			match = 1;
+			return;
 		}
+
+		if (thisRacer->id > id)
+		{
+			tempRacer = new_car(id);
+			if (prevRacer)
+				prevRacer->next = tempRacer;
+			else
+				*racer_head = tempRacer;
+			tempRacer->next = thisRacer;
+			return;
+		}
+		prevRacer = thisRacer;
 		thisRacer = thisRacer->next;
 
 	}
-	if (match == 1)
-		return;
-	
+
+	prevRacer->next = new_car(id);
+}
+
+racer *new_car(int id)
+{
+	racer *newRacer;
+
 	newRacer = malloc(sizeof(racer));
 	if (newRacer == NULL)
-		return;
+		return NULL;
 	
-	if (thisRacer == *racer_head)
-		*racer_head = newRacer;
-	else
-		thisRacer->next = newRacer;
-
 	newRacer->next = NULL;
 	newRacer->laps = 0;
 	newRacer->id = id;
 	printf("Car %d joined the race\n", newRacer->id);
+
+	return newRacer;
 
 }
 
@@ -78,15 +93,15 @@ void race_state(int *id, size_t size)
 	(void) racer_head;
 	if (size == 0)
 	{
-		free_racers();
+		free_racers(racer_head);
 		return;
 	}
 
 	for (i = 0; i < size; i++)
 	{
-		check_racer_id(*id);
+		check_racer_id(&racer_head, id[i]);
 	}
 
-	print_race_state();
+	print_race_state(&racer_head);
 }
 
