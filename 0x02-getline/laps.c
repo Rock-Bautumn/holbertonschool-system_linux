@@ -14,7 +14,6 @@ void free_racers(racer *racer_head)
 
 	while (thisRacer)
 	{
-		printf("Freeing car %d\n", thisRacer->id);
 		freeRacer = thisRacer;
 		thisRacer = thisRacer->next;
 		free(freeRacer);
