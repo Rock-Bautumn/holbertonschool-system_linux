@@ -9,8 +9,11 @@
 char *_getline(const int fd)
 {
 	char *buffer;
+	char *output_string;
 	int i;
-
+	static int bytes_read;
+	static char leftovers[READ_SIZE];
+	
 	buffer = read(fd, buffer, READ_SIZE);
 
 	for (i = 0; i < READ_SIZE; i++)
@@ -19,7 +22,8 @@ char *_getline(const int fd)
 			{
 				return (i);
 			}
-
+		bytes_read += READ_SIZE;
+		 
 	}
 	
 	
