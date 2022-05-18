@@ -5,7 +5,15 @@
 #include <stddef.h>
 #include <stdio.h>
 
-typedef struct racer_node {
+/**
+ * struct racer_node - A singly linked list node that holds racer data
+ * @id: the ID of the car
+ * @laps: the number of laps completed
+ * @next: the next node
+*/
+
+typedef struct racer_node
+{
 	int id;
 	int laps;
 	struct racer_node *next;
