@@ -1,11 +1,16 @@
 #include "main.h"
 
+int main(int argc, char *argv[]) {
+	parsedCmdLine lsArgs;
 
-int main(int argc, char* argv[]) {
-
-    if (argc == 1)
-        listFiles(".");
-    (void) argc;
-    (void) argv;
-    return 0;
+	printf("Got %d arguments\n", argc);
+	if (argc == 1)
+		listFiles(".");
+	else if (argc > 1)
+	{
+		parseArgs(lsArgs, argv, argc);
+		parseLocations(lsArgs, argv, argc);
+		outputResults(lsArgs);
+	}
+	return 0;
 }
