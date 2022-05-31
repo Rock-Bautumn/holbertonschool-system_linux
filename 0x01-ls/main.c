@@ -8,6 +8,7 @@ int main(int argc, char *argv[]) {
 		listFiles(".");
 	else if (argc > 1)
 	{
+        initArgs(&lsArgs, argv[0]);
 		parseArgs(&lsArgs, argv, argc);
 		parseLocations(&lsArgs, argv, argc);
 		outputResults(&lsArgs);

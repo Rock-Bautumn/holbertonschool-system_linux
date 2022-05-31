@@ -12,6 +12,7 @@ typedef struct parsedCommandLine {
     char option_l;
     char option_one;
     char **items;
+    char *invoker;
 } parsedCmdLine;
 
 /**
@@ -33,6 +34,7 @@ typedef struct argument_s
 int mystrcmp(char *s1, char *s2);
 
 void checkArg(parsedCmdLine *lsArgs, char arg);
+void initArgs(parsedCmdLine *lsArgs, char *invokeStr);
 void insertArgs(parsedCmdLine *lsArgs, char *argv);
 void listFiles(const char* dirname);
 void parseArgs(parsedCmdLine *lsArgs, char **argv, int argc);

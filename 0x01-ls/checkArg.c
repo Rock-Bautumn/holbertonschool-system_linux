@@ -21,6 +21,8 @@ void checkArg(parsedCmdLine *lsArgs, char arg)
 			return;
 		}
     }
-	fprintf(stderr, ": unknown argument %c\n", arg);
+	fprintf(stderr, "%s: invalid option -- \'%c\'\n", lsArgs->invoker, arg);
+    fprintf(stderr, "Try '%s --help' for more information.", lsArgs->invoker);
+    fprintf(stderr, "\n");
 	exit(EXIT_FAILURE);
 }
