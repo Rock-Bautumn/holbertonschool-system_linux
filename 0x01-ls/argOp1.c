@@ -5,4 +5,6 @@ void argOp1(parsedCmdLine *theseLSargs, char thisArg)
         (void) theseLSargs;
     (void) thisArg;
     printf("ArgOp1 triggered!\n");
+    theseLSargs->option_one = 1;
+
 }

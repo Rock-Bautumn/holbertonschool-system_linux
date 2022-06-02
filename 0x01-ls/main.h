@@ -4,6 +4,9 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 
 typedef struct parsedCommandLine {
@@ -11,7 +14,8 @@ typedef struct parsedCommandLine {
     char option_A;
     char option_l;
     char option_one;
-    char **items;
+    char **files;
+    char **dirs;
     char *invoker;
 } parsedCmdLine;
 
@@ -29,14 +33,17 @@ typedef struct argument_s
 	void (*f)(parsedCmdLine *theseLSargs, char thisArg);
 } argument_t;
 
-
-
+int lstat(const char *pathname, struct stat *statbuf);
+int dirCounter(parsedCmdLine *lsArgs, char **argv, int argc);
+int fileCounter(parsedCmdLine *lsArgs, char **argv, int argc);
 int mystrcmp(char *s1, char *s2);
 
 void checkArg(parsedCmdLine *lsArgs, char arg);
 void initArgs(parsedCmdLine *lsArgs, char *invokeStr);
+
 void insertArgs(parsedCmdLine *lsArgs, char *argv);
 void listFiles(const char* dirname);
+void lsErr(parsedCmdLine *lsArgs, char *description, char *example);
 void parseArgs(parsedCmdLine *lsArgs, char **argv, int argc);
 void parseLocations(parsedCmdLine *lsArgs, char **argv, int argc);
 void argOpa(parsedCmdLine *theseLSargs, char thisArg);

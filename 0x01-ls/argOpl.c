@@ -2,7 +2,7 @@
 
 void argOpl(parsedCmdLine *theseLSargs, char thisArg)
 {
-        (void) theseLSargs;
-    (void) thisArg;
-    printf("ArgOpl triggered!\n");
+	(void) thisArg;
+	printf("ArgOpl triggered!\n");
+	theseLSargs->option_l = 1;
 }
