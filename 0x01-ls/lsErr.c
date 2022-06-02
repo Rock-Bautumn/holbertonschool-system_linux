@@ -1,7 +1,7 @@
 #include "main.h"
 
-void lsErr(parsedCmdLine *lsArgs, char *description, char *example)
+void lsErr(parsedCmdLine *lsArgs, char *description, char *thisCase)
 {
-    fprintf(stderr, "%s: %s '%s': ", lsArgs->invoker, description, example);
+    fprintf(stderr, "%s: %s '%s': ", lsArgs->invoker, description, thisCase);
     perror("");
 }

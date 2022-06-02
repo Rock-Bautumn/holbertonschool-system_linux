@@ -1,8 +1,10 @@
 #include "main.h"
 
-void listFiles(const char* dirname)
+void listFiles(parsedCmdLine *lsArgs, char* dirname)
 {
 	DIR* dir = opendir(dirname);
+	DIR* dir2 = opendir("./noreaddir");
+
 	struct dirent* entity;
 	char *thisname;
 
@@ -21,8 +23,14 @@ void listFiles(const char* dirname)
 	}
 	printf("\n");
 	closedir(dir);
-	dir = opendir(dirname);
-	entity = readdir(dir);
+	if (dir2 == NULL)
+	{
+		perror("unable to open testdir");
+		lsErr(lsArgs, "cannot open directory", dirname);
+		return;
+
+	}
+	entity = readdir(dir2);
 	while (entity != NULL)
 	{
 		thisname = entity->d_name;
@@ -32,9 +40,9 @@ void listFiles(const char* dirname)
 				
 			}
 
-		entity = readdir(dir);
+		entity = readdir(dir2);
 	}
 	printf("\n");
-	closedir(dir);
+	closedir(dir2);
 }
 

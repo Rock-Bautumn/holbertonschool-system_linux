@@ -4,20 +4,22 @@ int fileCounter(parsedCmdLine *lsArgs, char **argv, int argc)
 {
 	int count = 0;
 	int i = 1;
-	int result = 0;
 	struct stat thisStat;
 
 	for (i = 1; i < argc; i++)
 	{
-		printf("file counting %s\n", argv[i]);
-		result = lstat(argv[i], &thisStat);
-		if (result < 0)
-			lsErr(lsArgs, "cannot access", argv[i]);
-
-		else if (S_ISREG(thisStat.st_mode) == 1)
+		printf("file counting %s, %c, %d\n", argv[i], argv[i][0], (int) argv[i][0]);
+		if (argv[i][0] != '-')		
 		{
-			count++;
-			printf("matched on %s\n", argv[i]);
+			printf("%c is not -\n", argv[i][0]);
+			if (lstat(argv[i], &thisStat) < 0)
+				lsErr(lsArgs, "cannot access", argv[i]);
+
+			else if (S_ISREG(thisStat.st_mode) == 1)
+			{
+				count++;
+				printf("matched on %s\n", argv[i]);
+			}
 		}
 	}
 	return count;

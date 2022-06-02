@@ -42,8 +42,8 @@ void checkArg(parsedCmdLine *lsArgs, char arg);
 void initArgs(parsedCmdLine *lsArgs, char *invokeStr);
 
 void insertArgs(parsedCmdLine *lsArgs, char *argv);
-void listFiles(const char* dirname);
-void lsErr(parsedCmdLine *lsArgs, char *description, char *example);
+void listFiles(parsedCmdLine *lsArgs, char* dirname);
+void lsErr(parsedCmdLine *lsArgs, char *description, char *thisCase);
 void parseArgs(parsedCmdLine *lsArgs, char **argv, int argc);
 void parseLocations(parsedCmdLine *lsArgs, char **argv, int argc);
 void argOpa(parsedCmdLine *theseLSargs, char thisArg);
