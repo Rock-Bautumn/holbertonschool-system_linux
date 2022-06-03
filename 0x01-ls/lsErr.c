@@ -2,6 +2,6 @@
 
 void lsErr(parsedCmdLine *lsArgs, char *description, char *thisCase)
 {
-    fprintf(stderr, "%s: %s '%s': ", lsArgs->invoker, description, thisCase);
-    perror("");
+	fprintf(stderr, "%s: %s '%s': ", lsArgs->invoker, description, thisCase);
+	perror("");
 }

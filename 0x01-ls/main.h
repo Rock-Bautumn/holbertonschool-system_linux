@@ -33,6 +33,11 @@ typedef struct argument_s
 	void (*f)(parsedCmdLine *theseLSargs, char thisArg);
 } argument_t;
 
+char *_strndup(char *str, int maxlen);
+
+char **listMalloc(parsedCmdLine *lsArgs, size_t size, char dirMode, char *addlFree);
+
+int _strnlen(char *s, int max);
 int lstat(const char *pathname, struct stat *statbuf);
 int dirCounter(parsedCmdLine *lsArgs, char **argv, int argc);
 int fileCounter(parsedCmdLine *lsArgs, char **argv, int argc);

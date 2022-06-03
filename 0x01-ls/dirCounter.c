@@ -8,14 +8,17 @@ int dirCounter(parsedCmdLine *lsArgs, char **argv, int argc)
 
 	for (i = 1; i < argc; i++)
 	{
-		printf("dir counting %s\n", argv[i]);
-		if (lstat(argv[i], &thisStat) < 0)
-			lsErr(lsArgs, "cannot access", argv[i]);
-
-		else if (S_ISREG(thisStat.st_mode) == 1)
+		if (argv[i][0] != '-')
 		{
-			count++;
-			printf("matched on %s\n", argv[i]);
+			printf("dir counting %s\n", argv[i]);
+			if (lstat(argv[i], &thisStat) < 0)
+				lsErr(lsArgs, "cannot access", argv[i]);
+
+			else if (S_ISDIR(thisStat.st_mode) == 1)
+			{
+				count++;
+				printf("matched on %s\n", argv[i]);
+			}
 		}
 	}
 	return count;

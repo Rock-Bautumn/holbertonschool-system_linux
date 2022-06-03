@@ -8,8 +8,7 @@ int fileCounter(parsedCmdLine *lsArgs, char **argv, int argc)
 
 	for (i = 1; i < argc; i++)
 	{
-		printf("file counting %s, %c, %d\n", argv[i], argv[i][0], (int) argv[i][0]);
-		if (argv[i][0] != '-')		
+		if (argv[i][0] != '-')
 		{
 			printf("%c is not -\n", argv[i][0]);
 			if (lstat(argv[i], &thisStat) < 0)
