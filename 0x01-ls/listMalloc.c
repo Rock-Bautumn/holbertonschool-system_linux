@@ -1,27 +1,49 @@
 #include "main.h"
 
 
-char **listMalloc(parsedCmdLine *lsArgs, size_t size, char dirMode, char **addlFree)
+char **listMalloc(parsedCmdLine *lsArgs, char dirMode)
 {
-	char **returnList;
 	char **holder;
 
-	if (size == 0 && dirMode == 1)
-		holder = malloc(sizeof(char *) * 1);
-	else if (size == 0)
-		return NULL;
-	holder = malloc(sizeof(char *) * size);
-	if (holder == NULL)
+	if (dirMode == 1)
 	{
-		if (addlFree == NULL)
-			lsErr(lsArgs, "out of memory", "malloc for files");
+		if (lsArgs->dirQty == 0 && lsArgs->fileQty == 0)
+		{
+			holder = malloc(sizeof(char *));
+			if (holder == NULL)
+			{
+				lsErr(lsArgs, "out of memory", "malloc4dirs");
+				free(lsArgs->files);
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (lsArgs->dirQty > 0)
+		{
+			holder = malloc(sizeof(char *) * lsArgs->dirQty);
+			if (holder == NULL)
+			{
+				lsErr(lsArgs, "out of memory", "malloc4dirs");
+				free(lsArgs->files);
+				exit(EXIT_FAILURE);
+			}
+		}
+		else
+			return NULL;
+	}
+	else
+	{
+		if (lsArgs->fileQty < 1)
+			return NULL;
 		else
 		{
-			lsErr(lsArgs, "out of memory", "malloc for dirs");
-			free(addlFree);
+			holder = malloc(sizeof(char *) * lsArgs->fileQty);
+			if (holder == NULL)
+			{
+				lsErr(lsArgs, "out of memory", "malloc4files");
+				exit(EXIT_FAILURE);
+			}
 		}
-		exit(EXIT_FAILURE);
 	}
-	returnList = holder;
-	return returnList;
+	
+	return holder;
 }

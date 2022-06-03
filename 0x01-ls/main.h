@@ -36,7 +36,7 @@ typedef struct argument_s
 
 char *_strndup(char *str, int maxlen);
 
-char **listMalloc(parsedCmdLine *lsArgs, size_t size, char dirMode, char **addlFree);
+char **listMalloc(parsedCmdLine *lsArgs, char dirMode);
 
 int _strnlen(char *s, int max);
 int lstat(const char *pathname, struct stat *statbuf);

@@ -11,10 +11,11 @@ void freeList(char **list, size_t size)
 	int i = size;
 
 
-	while (i)
+	while (i > 0)
 	{
 		i--;
-		free(list[i]);
+		if (&list[i] != NULL)
+			free(list[i]);
 	}
 
 	free(list);
