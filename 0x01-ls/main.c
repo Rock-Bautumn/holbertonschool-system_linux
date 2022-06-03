@@ -1,6 +1,7 @@
 #include "main.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 	parsedCmdLine lsArgs;
 
 	printf("Got %d arguments\n", argc);
@@ -12,6 +13,7 @@ int main(int argc, char *argv[]) {
 		parseArgs(&lsArgs, argv, argc);
 		parseLocations(&lsArgs, argv, argc);
 		outputResults(&lsArgs);
+		cleanup(&lsArgs);
 	}
 	return 0;
 }

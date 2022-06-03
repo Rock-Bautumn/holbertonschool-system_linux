@@ -8,19 +8,24 @@ void parseLocations(parsedCmdLine *lsArgs, char **argv, int argc)
 
 
 	lsArgs->files = listMalloc(lsArgs, foundFiles, 0, NULL);
-	lsArgs->dirs = listMalloc(lsArgs, foundDirs, 1, *lsArgs->files);
+	lsArgs->dirs = listMalloc(lsArgs, foundDirs, 1, lsArgs->files);
 
 	if (foundDirs == 0 && foundFiles == 0)
 	{
 		printf("found no file or dir args\n");
 		lsArgs->dirs[0] = _strndup(".", 1);
-		lsArgs->dirs[1] = NULL;
+		foundDirs = 1;
 		printf("first dir is %s\n", lsArgs->dirs[0]);
 	}
+
+	printf("we found %lu files\n", foundFiles);
+	printf("we found %lu dirs\n", foundDirs);
+	lsArgs->fileQty = foundFiles;
+	lsArgs->fileQty = foundDirs;
+	printf("Parsed locations!\n");
+}
+/*
 	free(lsArgs->files);
 	free(lsArgs->dirs[0]);
 	free(lsArgs->dirs);
-	printf("we found %lu files\n", foundFiles);
-	printf("we found %lu dirs\n", foundDirs);
-	printf("Parsed locations!\n");
-}
+	*/

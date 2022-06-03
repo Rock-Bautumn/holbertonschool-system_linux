@@ -15,7 +15,9 @@ typedef struct parsedCommandLine {
     char option_l;
     char option_one;
     char **files;
+    size_t fileQty;
     char **dirs;
+    size_t dirQty;
     char *invoker;
 } parsedCmdLine;
 
@@ -25,7 +27,6 @@ typedef struct parsedCommandLine {
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
  */
 typedef struct argument_s
 {
@@ -35,7 +36,7 @@ typedef struct argument_s
 
 char *_strndup(char *str, int maxlen);
 
-char **listMalloc(parsedCmdLine *lsArgs, size_t size, char dirMode, char *addlFree);
+char **listMalloc(parsedCmdLine *lsArgs, size_t size, char dirMode, char **addlFree);
 
 int _strnlen(char *s, int max);
 int lstat(const char *pathname, struct stat *statbuf);
@@ -43,9 +44,11 @@ int dirCounter(parsedCmdLine *lsArgs, char **argv, int argc);
 int fileCounter(parsedCmdLine *lsArgs, char **argv, int argc);
 int mystrcmp(char *s1, char *s2);
 
+void cleanup(parsedCmdLine *lsArgs);
 void checkArg(parsedCmdLine *lsArgs, char arg);
 void initArgs(parsedCmdLine *lsArgs, char *invokeStr);
 
+void freeList(char **list, size_t size);
 void insertArgs(parsedCmdLine *lsArgs, char *argv);
 void listFiles(parsedCmdLine *lsArgs, char* dirname);
 void lsErr(parsedCmdLine *lsArgs, char *description, char *thisCase);
