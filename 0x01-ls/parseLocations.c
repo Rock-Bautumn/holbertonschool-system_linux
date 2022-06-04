@@ -9,8 +9,8 @@ void parseLocations(parsedCmdLine *lsArgs, char **argv, int argc)
 	lsArgs->fileQty = foundFiles;
 	lsArgs->fileQty = foundDirs;
 
-	lsArgs->files = listMalloc(lsArgs, 0);
-	lsArgs->dirs = listMalloc(lsArgs, 1);
+	lsArgs->files = fileListMalloc(lsArgs);
+	lsArgs->dirs = dirListMalloc(lsArgs);
 
 	if (foundDirs == 0 && foundFiles == 0)
 	{
