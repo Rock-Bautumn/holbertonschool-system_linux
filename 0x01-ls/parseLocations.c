@@ -16,7 +16,7 @@ void parseLocations(parsedCmdLine *lsArgs, char **argv, int argc)
 	{
 		printf("found no file or dir args\n");
 		lsArgs->dirs[0] = _strndup(".", 1);
-		lsArgs->fileQty = 1;
+		lsArgs->dirQty = 1;
 		printf("first dir is %s\n", lsArgs->dirs[0]);
 	}
 

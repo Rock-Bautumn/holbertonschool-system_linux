@@ -21,5 +21,6 @@ int fileCounter(parsedCmdLine *lsArgs, char **argv, int argc)
 			}
 		}
 	}
+	printf("fileCounter found %i files\n", count);
 	return count;
 }

@@ -56,6 +56,7 @@ void listFiles(parsedCmdLine *lsArgs, char* dirname);
 void lsErr(parsedCmdLine *lsArgs, char *description, char *thisCase);
 void parseArgs(parsedCmdLine *lsArgs, char **argv, int argc);
 void parseLocations(parsedCmdLine *lsArgs, char **argv, int argc);
+void printList(char **list, size_t size);
 void argOpa(parsedCmdLine *theseLSargs, char thisArg);
 void argOpA(parsedCmdLine *theseLSargs, char thisArg);
 void argOpl(parsedCmdLine *theseLSargs, char thisArg);

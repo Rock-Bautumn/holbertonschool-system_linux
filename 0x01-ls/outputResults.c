@@ -2,7 +2,11 @@
 
 void outputResults(parsedCmdLine *lsArgs)
 {
-	(void) lsArgs;
-	printf("Output results!\n");
+	printf("file qty = %lu\n", lsArgs->fileQty);
+	printf("dir qty = %lu\n", lsArgs->dirQty);
+
+	printList(lsArgs->files, lsArgs->fileQty);
+	printList(lsArgs->dirs, lsArgs->dirQty);
+	printf("Output results is donels!\n");
 
 }
