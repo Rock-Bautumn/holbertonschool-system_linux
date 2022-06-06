@@ -15,5 +15,5 @@ int main(int argc, char *argv[])
 		outputResults(&lsArgs);
 		cleanup(&lsArgs);
 	}
-	return 0;
+	return lsArgs.exit_status;
 }

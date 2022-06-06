@@ -11,6 +11,7 @@ int fileCounter(parsedCmdLine *lsArgs, char **argv, int argc)
 		if (argv[i][0] != '-')
 		{
 			printf("%c is not -\n", argv[i][0]);
+			lsArgs->nonArgQty++;
 			if (lstat(argv[i], &thisStat) < 0)
 				lsErr(lsArgs, "cannot access", argv[i]);
 

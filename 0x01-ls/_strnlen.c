@@ -11,6 +11,8 @@ int _strnlen(char *s, int max)
 {
 	int length = 0;
 
+	if (max < 0)
+		max = INT_MAX;
 	while (*s != '\0' && length < max)
 	{
 		s++;

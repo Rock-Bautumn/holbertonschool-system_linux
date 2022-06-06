@@ -6,13 +6,14 @@ int dirCounter(parsedCmdLine *lsArgs, char **argv, int argc)
 	int i = 1;
 	struct stat thisStat;
 
+	(void) lsArgs;
 	for (i = 1; i < argc; i++)
 	{
 		if (argv[i][0] != '-')
 		{
 			printf("dir counting %s\n", argv[i]);
 			if (lstat(argv[i], &thisStat) < 0)
-				lsErr(lsArgs, "cannot access", argv[i]);
+				lsArgs->exit_status = 2;
 
 			else if (S_ISDIR(thisStat.st_mode) == 1)
 			{

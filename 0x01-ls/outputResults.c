@@ -7,6 +7,6 @@ void outputResults(parsedCmdLine *lsArgs)
 
 	printList(lsArgs->files, lsArgs->fileQty);
 	printList(lsArgs->dirs, lsArgs->dirQty);
-	printf("Output results is donels!\n");
+	printf("Output results is done!\n");
 
 }

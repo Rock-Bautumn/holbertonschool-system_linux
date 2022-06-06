@@ -15,7 +15,10 @@ void freeList(char **list, size_t size)
 	{
 		i--;
 		if (&list[i] != NULL)
+		{
+			printf("freeing %p\n", (void *) list[i]);
 			free(list[i]);
+		}
 	}
 
 	free(list);

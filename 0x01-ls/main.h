@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
+#include <limits.h>
 
 typedef struct parsedCommandLine {
     char option_a;
@@ -18,7 +18,9 @@ typedef struct parsedCommandLine {
     size_t fileQty;
     char **dirs;
     size_t dirQty;
+    size_t nonArgQty;
     char *invoker;
+    char exit_status;
 } parsedCmdLine;
 
 /**
@@ -46,11 +48,11 @@ int dirCounter(parsedCmdLine *lsArgs, char **argv, int argc);
 int fileCounter(parsedCmdLine *lsArgs, char **argv, int argc);
 int mystrcmp(char *s1, char *s2);
 
+void addItemsToLists(parsedCmdLine *lsArgs, char **argv, int argc);
 void cleanup(parsedCmdLine *lsArgs);
 void checkArg(parsedCmdLine *lsArgs, char arg);
-void initArgs(parsedCmdLine *lsArgs, char *invokeStr);
-
 void freeList(char **list, size_t size);
+void initArgs(parsedCmdLine *lsArgs, char *invokeStr);
 void insertArgs(parsedCmdLine *lsArgs, char *argv);
 void listFiles(parsedCmdLine *lsArgs, char* dirname);
 void lsErr(parsedCmdLine *lsArgs, char *description, char *thisCase);
