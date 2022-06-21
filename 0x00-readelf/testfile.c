@@ -58,25 +58,21 @@ int main(int argc, char** argv)
 	struct stat stat = {0};
 	int i = 0;
 
-	/* open the /bin/ls file with read-only permission */
-	if (argc == 1)
-		fd = open("/bin/ls", O_RDONLY);
-	else
-		fd = open(argv[1], O_RDONLY);
+	if (argc < 2)
+	{
+		fprintf(STDERR_FILENO, "Usage:\n%s FILENAME", argv[0]);
+	}
+	fd = open(argv[1], O_RDONLY);
 	if (fd < 0) {
 		perror("open");
 		goto cleanup;
 	}
 
-	/* find the size of /bin/ls */
 	if (fstat(fd, &stat) != 0) {
 		perror("stat");
 		goto cleanup;
 	}
 
-	/* printf("Everything is OK!\n"); */
-
-	/* put the contents of /bin/ls in memory */
 	ls = mmap(NULL, stat.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
 	if (ls == MAP_FAILED) {
 		perror("mmap");
@@ -122,38 +118,44 @@ int main(int argc, char** argv)
 	getOSABI((unsigned char)ls[EI_OSABI]);
 	labelPrint("ABI Version:");
 	printf("%u\n", (unsigned char)ls[EI_ABIVERSION]);
-	labelPrint("Type:");
-	if (ET_CORE == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
-	{
-		printf("CORE (Core file)\n");
-	}
-	else if (ET_EXEC == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
-	{
-		printf("EXEC (Executable file)\n");
-	}
-	else if (ET_REL == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
-	{
-		printf("REL (Relocatable file)\n");
-	}
-	else if (ET_DYN == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
-	{
-		printf("DYN (Shared object file)\n");
-	}
-	else if (ET_NONE == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
-	{
-		printf("Unknown type\n");
-	}
-	else
-	printf("Something weird\n");
 
 	if ((unsigned char)ls[EI_CLASS] == ELFCLASS64)
 	{
+		labelPrint("Type:");
+		if (ET_CORE == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
+			printf("CORE (Core file)\n");
+		else if (ET_EXEC == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
+			printf("EXEC (Executable file)\n");
+		else if (ET_REL == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
+			printf("REL (Relocatable file)\n");
+		else if (ET_DYN == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
+			printf("DYN (Shared object file)\n");
+		else if (ET_NONE == (unsigned char) ((Elf64_Ehdr *)ls)->e_type)
+			printf("Unknown type\n");
+		else
+			printf("Something weird\n");
+		labelPrint("Machine:");
 		labelPrint("Entry point address:");
 		printf("0x%lx\n", ((Elf64_Ehdr *)ls)->e_entry);
 		/* printf("Entry point address: %p\n", (void *)((Elf64_Ehdr *)ls)->e_entry); */
 	}
 	else if ((unsigned char)ls[EI_CLASS] == ELFCLASS32)
 	{
+		labelPrint("Type:");
+		if (ET_CORE == (unsigned char) ((Elf32_Ehdr *)ls)->e_type)
+			printf("CORE (Core file)\n");
+		else if (ET_EXEC == (unsigned char) ((Elf32_Ehdr *)ls)->e_type)
+			printf("EXEC (Executable file)\n");
+		else if (ET_REL == (unsigned char) ((Elf32_Ehdr *)ls)->e_type)
+			printf("REL (Relocatable file)\n");
+		else if (ET_DYN == (unsigned char) ((Elf32_Ehdr *)ls)->e_type)
+			printf("DYN (Shared object file)\n");
+		else if (ET_NONE == (unsigned char) ((Elf32_Ehdr *)ls)->e_type)
+			printf("Unknown type\n");
+		else
+			printf("Something weird\n");
+		labelPrint("Machine:");
+		printf("\n");
 		labelPrint("Entry point address:");
 		printf("0x%x\n",((Elf32_Ehdr *)ls)->e_entry);
 	}
