@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 
 	if (argc < 2)
 	{
-		fprintf(STDERR_FILENO, "Usage:\n%s FILENAME", argv[0]);
+		fprintf(stderr, "Usage:\n%s FILENAME", argv[0]);
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0) {
