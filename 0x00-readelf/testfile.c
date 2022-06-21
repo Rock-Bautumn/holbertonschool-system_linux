@@ -8,15 +8,30 @@
 #include <fcntl.h>
 
 /* printf("  Data:%*s%s", 30, " ", "Unknown data format\n"); */
+/**
+ * lineItemPrint - Prints text according to readelf -W -h entries
+ * @label: The text on the left side
+ * @value: The explanation of the value
+ * Return: void
+*/
 void lineItemPrint(char* label, char* value)
 {
 	printf("  %-35s%s\n", label, value);
 }
-
+/**
+ * labelPrint - Prints label text according to readelf -W -h entries
+ * @label: The text on the left side
+ * Return: void
+*/
 void labelPrint(char* label)
 {
 	printf("  %-35s", label);
 }
+/**
+ * getOSABI - Prints OS/ABI text according to readelf -W -h entries
+ * @value: The value from the struct to determine what the OS/ABI is
+ * Return: void
+*/
 void getOSABI(unsigned char value)
 {
 	labelPrint("OS/ABI:");
@@ -35,22 +50,12 @@ void getOSABI(unsigned char value)
 		printf("<unknown: %x>\n", value);		
 	}
 }
-
-
-void revstr(char *str1)
-{
-    int i, len, temp;
-
-    len = strlen(str1);
-    for (i = 0; i < len/2; i++)
-    {
-        temp = str1[i];
-        str1[i] = str1[len - i - 1];
-        str1[len - i - 1] = temp;
-    }
-}
-
-
+/**
+ * main - Prints text according to readelf -W -h entries
+ * @argc: Number of arguments passed
+ * @argv: The arguments passed
+ * Return: 0 if success, something else if fail
+*/
 int main(int argc, char** argv)
 {
 	const char *ls = NULL;
