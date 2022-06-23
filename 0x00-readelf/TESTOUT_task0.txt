@@ -6,5 +6,15 @@ ELF Header:
   OS/ABI:                            UNIX - System V
   ABI Version:                       0
   Type:                              Unknown type
-  Machine:                           
+  Machine:                           An unknown machine
+  Version:                           0x0
   Entry point address:               0x200d0100
+  Start of program headers:          872415232 (bytes into file)
+  Start of section headers:          1347027200 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               13312 (bytes)
+  Size of program headers:           8192 (bytes)
+  Number of program headers:         1536
+  Size of section headers:           10240 (bytes)
+  Number of section headers:         6144
+  Section header string table index: 5888

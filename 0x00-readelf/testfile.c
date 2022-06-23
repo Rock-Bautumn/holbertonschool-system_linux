@@ -140,9 +140,39 @@ int main(int argc, char** argv)
 		else
 			printf("Something weird\n");
 		labelPrint("Machine:");
+		if (EM_X86_64 == (unsigned char) ((Elf64_Ehdr *)ls)->e_machine)
+			printf("Advanced Micro Devices X86-64\n");
+		else if (EM_SPARC == (unsigned char) ((Elf64_Ehdr *)ls)->e_machine)
+			printf("Sparc\n");
+		else
+			printf("Unknown Type\n");
+		labelPrint("Version:");
+		if (EV_CURRENT == (unsigned char) ((Elf64_Ehdr *)ls)->e_version)
+			printf("0x1\n");
+		else
+			printf("0x0\n");
 		labelPrint("Entry point address:");
 		printf("0x%lx\n", ((Elf64_Ehdr *)ls)->e_entry);
 		/* printf("Entry point address: %p\n", (void *)((Elf64_Ehdr *)ls)->e_entry); */
+		labelPrint("Start of program headers:");
+		printf("%lu (bytes into file)\n", ((Elf64_Ehdr *)ls)->e_phoff);
+		labelPrint("Start of section headers:");
+		printf("%lu (bytes into file)\n", ((Elf64_Ehdr *)ls)->e_shoff);
+		labelPrint("Flags:");
+		printf("0x%u\n", ((Elf64_Ehdr *)ls)->e_flags);
+		labelPrint("Size of this header:");
+		printf("%u (bytes)\n", ((Elf64_Ehdr *)ls)->e_ehsize);
+		labelPrint("Size of program headers:");
+		printf("%u (bytes)\n", ((Elf64_Ehdr *)ls)->e_phentsize);
+		labelPrint("Number of program headers:");
+		printf("%u\n", ((Elf64_Ehdr *)ls)->e_phnum);
+		labelPrint("Size of section headers:");
+		printf("%u (bytes)\n", ((Elf64_Ehdr *)ls)->e_shentsize);
+		labelPrint("Number of section headers:");
+		printf("%u\n", ((Elf64_Ehdr *)ls)->e_shnum);
+		labelPrint("Section header string table index:");
+		printf("%u\n", ((Elf64_Ehdr *)ls)->e_shstrndx);
+
 	}
 	else if ((unsigned char)ls[EI_CLASS] == ELFCLASS32)
 	{
@@ -160,9 +190,39 @@ int main(int argc, char** argv)
 		else
 			printf("Something weird\n");
 		labelPrint("Machine:");
-		printf("\n");
+		if (EM_386 == (unsigned char) ((Elf32_Ehdr *)ls)->e_machine)
+			printf("Intel 80386\n");
+		else if (EM_SPARC == (unsigned char) ((Elf32_Ehdr *)ls)->e_machine)
+			printf("Sparc\n");
+		else if (EM_NONE == (unsigned char) ((Elf32_Ehdr *)ls)->e_machine)
+			printf("An unknown machine\n");
+		else
+			printf("Unknown Type: %x\n", (unsigned char) ((Elf32_Ehdr *)ls)->e_machine);
+				labelPrint("Version:");
+		if (EV_CURRENT == (unsigned char) ((Elf32_Ehdr *)ls)->e_version)
+			printf("0x1\n");
+		else
+			printf("0x0\n");
 		labelPrint("Entry point address:");
 		printf("0x%x\n",((Elf32_Ehdr *)ls)->e_entry);
+		labelPrint("Start of program headers:");
+		printf("%u (bytes into file)\n", ((Elf32_Ehdr *)ls)->e_phoff);
+		labelPrint("Start of section headers:");
+		printf("%u (bytes into file)\n", ((Elf32_Ehdr *)ls)->e_shoff);
+		labelPrint("Flags:");
+		printf("0x%u\n", ((Elf32_Ehdr *)ls)->e_flags);
+		labelPrint("Size of this header:");
+		printf("%u (bytes)\n", ((Elf32_Ehdr *)ls)->e_ehsize);
+		labelPrint("Size of program headers:");
+		printf("%u (bytes)\n", ((Elf32_Ehdr *)ls)->e_phentsize);
+		labelPrint("Number of program headers:");
+		printf("%u\n", ((Elf32_Ehdr *)ls)->e_phnum);
+		labelPrint("Size of section headers:");
+		printf("%u (bytes)\n", ((Elf32_Ehdr *)ls)->e_shentsize);
+		labelPrint("Number of section headers:");
+		printf("%u\n", ((Elf32_Ehdr *)ls)->e_shnum);
+		labelPrint("Section header string table index:");
+		printf("%u\n", ((Elf32_Ehdr *)ls)->e_shstrndx);
 	}
 	/* close file descriptors and free memory before the program exits */
 	cleanup:
