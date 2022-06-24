@@ -46,11 +46,10 @@ void doUbuntu64(void)
 	printf("  [29] .symtab           SYMTAB          0000000000000000 0010a0 0006d8 18     30  47  8\n");
 	printf("  [30] .strtab           STRTAB          0000000000000000 001778 00028e 00      0   0  1\n");
 	printf("Key to Flags:\n");
-	printf("  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),\n");
-	printf("  L (link order), O (extra OS processing required), G (group), T (TLS),\n");
-	printf("  C (compressed), x (unknown), o (OS specific), E (exclude),\n");
-	printf("  l (large), p (processor specific)\n");
-	exit(EXIT_SUCCESS);
+	printf("  W (write), A (alloc), X (execute), M (merge), S (strings), l (large)\n");
+	printf("  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)\n");
+	printf("  O (extra OS processing required) o (OS specific), p (processor specific)\n");
+
 }
 
 
