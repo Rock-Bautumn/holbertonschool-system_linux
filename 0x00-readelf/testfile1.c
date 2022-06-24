@@ -61,10 +61,15 @@ void doUbuntu64(void)
 */
 int main(int argc, char** argv)
 {
+	int i;
 	if (argc < 2)
 		fprintf(stderr, "Usage:\n%s FILENAME", argv[0]);
 	
 	if (strncmp(argv[1], "ubuntu64", 8))
 		doUbuntu64();
+	for (i = 0; i < argc; i++)
+	{
+		printf("%d - %s\n", i, argv[i]);
+	}
 	return 0;
 }
