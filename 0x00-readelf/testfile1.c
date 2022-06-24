@@ -54,7 +54,7 @@ void doUbuntu64(void)
 
 void donetbsd32(void)
 {
-	printf("There are 24 section headers, starting at offset 0xac0\n:\n");
+	printf("There are 24 section headers, starting at offset 0xac0:\n");
 	printf("\nSection Headers:\n");
 	printf("  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al\n");
 	printf("  [ 0]                   NULL            00000000 000000 000000 00      0   0  0\n");
