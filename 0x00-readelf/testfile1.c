@@ -216,7 +216,7 @@ printf("  O (extra OS processing required) o (OS specific), p (processor specifi
 exit(EXIT_SUCCESS);
 }
 
-void jpegmod(void)
+void dojpegmod(void)
 {
 printf("There are 14 section headers, starting at offset 0x1160:\n");
 
