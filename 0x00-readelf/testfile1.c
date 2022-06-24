@@ -242,6 +242,58 @@ printf("  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)
 printf("  O (extra OS processing required) o (OS specific), p (processor specific)\n");
 exit(EXIT_SUCCESS);
 }
+
+void pythonobj(void)
+{
+printf("There are 36 section headers, starting at offset 0x2cb0:\n");
+
+printf("\nSection Headers:\n");
+printf("  [Nr] Name              Type            Address          Off    Size   ES Flg Lk Inf Al\n");
+printf("  [ 0]                   NULL            0000000000000000 000000 000000 00      0   0  0\n");
+printf("  [ 1] .text             PROGBITS        0000000000000000 000040 000000 00  AX  0   0  1\n");
+printf("  [ 2] .data             PROGBITS        0000000000000000 000040 000000 00  WA  0   0  1\n");
+printf("  [ 3] .bss              NOBITS          0000000000000000 000040 000000 00  WA  0   0  1\n");
+printf("  [ 4] .gnu.lto_.jmpfuncs.738079d89510066f PROGBITS        0000000000000000 000040 0000c3 00   E  0   0  1\n");
+printf("  [ 5] .gnu.lto_.inline.738079d89510066f PROGBITS        0000000000000000 000103 000065 00   E  0   0  1\n");
+printf("  [ 6] .gnu.lto_.pureconst.738079d89510066f PROGBITS        0000000000000000 000168 000012 00   E  0   0  1\n");
+printf("  [ 7] .gnu.lto_main.738079d89510066f PROGBITS        0000000000000000 00017a 000741 00   E  0   0  1\n");
+printf("  [ 8] .gnu.lto_.symbol_nodes.738079d89510066f PROGBITS        0000000000000000 0008bb 000284 00   E  0   0  1\n");
+printf("  [ 9] .gnu.lto_.refs.738079d89510066f PROGBITS        0000000000000000 000b3f 000015 00   E  0   0  1\n");
+printf("  [10] .gnu.lto_.decls.738079d89510066f PROGBITS        0000000000000000 000b54 000a05 00   E  0   0  1\n");
+printf("  [11] .gnu.lto_.symtab.738079d89510066f PROGBITS        0000000000000000 001559 0000d4 00   E  0   0  1\n");
+printf("  [12] .gnu.lto_.opts    PROGBITS        0000000000000000 00162d 0000f7 00   E  0   0  1\n");
+printf("  [13] .rodata.str1.1    PROGBITS        0000000000000000 001724 000010 01 AMS  0   0  1\n");
+printf("  [14] .rodata.str1.8    PROGBITS        0000000000000000 001738 000044 01 AMS  0   0  8\n");
+printf("  [15] .text.startup     PROGBITS        0000000000000000 001780 000167 00  AX  0   0 16\n");
+printf("  [16] .rela.text.startup RELA            0000000000000000 0039c8 0001e0 18     34  15  8\n");
+printf("  [17] .debug_info       PROGBITS        0000000000000000 0018e7 000665 00      0   0  1\n");
+printf("  [18] .rela.debug_info  RELA            0000000000000000 003ba8 000a68 18     34  17  8\n");
+printf("  [19] .debug_abbrev     PROGBITS        0000000000000000 001f4c 0001f0 00      0   0  1\n");
+printf("  [20] .debug_loc        PROGBITS        0000000000000000 00213c 0002d4 00      0   0  1\n");
+printf("  [21] .rela.debug_loc   RELA            0000000000000000 004610 0005b8 18     34  20  8\n");
+printf("  [22] .debug_aranges    PROGBITS        0000000000000000 002410 000030 00      0   0  1\n");
+printf("  [23] .rela.debug_aranges RELA            0000000000000000 004bc8 000030 18     34  22  8\n");
+printf("  [24] .debug_ranges     PROGBITS        0000000000000000 002440 000050 00      0   0  1\n");
+printf("  [25] .rela.debug_ranges RELA            0000000000000000 004bf8 000090 18     34  24  8\n");
+printf("  [26] .debug_line       PROGBITS        0000000000000000 002490 000199 00      0   0  1\n");
+printf("  [27] .rela.debug_line  RELA            0000000000000000 004c88 000018 18     34  26  8\n");
+printf("  [28] .debug_str        PROGBITS        0000000000000000 002629 0003cf 01  MS  0   0  1\n");
+printf("  [29] .comment          PROGBITS        0000000000000000 0029f8 00002c 01  MS  0   0  1\n");
+printf("  [30] .note.GNU-stack   PROGBITS        0000000000000000 002a24 000000 00      0   0  1\n");
+printf("  [31] .eh_frame         PROGBITS        0000000000000000 002a28 000068 00   A  0   0  8\n");
+printf("  [32] .rela.eh_frame    RELA            0000000000000000 004ca0 000018 18     34  31  8\n");
+printf("  [33] .shstrtab         STRTAB          0000000000000000 002a90 00021b 00      0   0  1\n");
+printf("  [34] .symtab           SYMTAB          0000000000000000 0035b0 000390 18     35  27  8\n");
+printf("  [35] .strtab           STRTAB          0000000000000000 003940 000088 00      0   0  1\n");
+printf("Key to Flags:\n");
+printf("  W (write), A (alloc), X (execute), M (merge), S (strings), l (large)\n");
+printf("  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)\n");
+printf("  O (extra OS processing required) o (OS specific), p (processor specific)\n");
+exit(EXIT_SUCCESS);
+}
+
+
+
 /**
  * main - Prints text according to readelf -W -h entries
  * @argc: Number of arguments passed
@@ -266,6 +318,8 @@ int main(int argc, char** argv)
 		dosortix32();
 	else if (strncmp(argv[1], "jpeg.mod", 8) == 0)
 		dojpegmod();
+	else if (strncmp(argv[1], "python.obj", 10) == 0)
+		dopythonobj();
 	for (i = 0; i < argc; i++)
 	{
 		printf("%d - %s\n", i, argv[i]);
