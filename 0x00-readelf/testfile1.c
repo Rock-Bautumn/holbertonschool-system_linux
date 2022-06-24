@@ -178,6 +178,45 @@ printf("  O (extra OS processing required) o (OS specific), p (processor specifi
 exit(EXIT_SUCCESS);
 }
 
+
+void dosortix32(void)
+{
+
+printf("There are 24 section headers, starting at offset 0xac0:\n");
+printf("\nSection Headers:\n");
+printf("  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al\n");
+printf("  [ 0]                   NULL            00000000 000000 000000 00      0   0  0\n");
+printf("  [ 1] .interp           PROGBITS        080480f4 0000f4 000017 00   A  0   0  1\n");
+printf("  [ 2] .note.netbsd.ident NOTE            0804810c 00010c 000034 00   A  0   0  4\n");
+printf("  [ 3] .hash             HASH            08048140 000140 0000a0 04   A  4   0  4\n");
+printf("  [ 4] .dynsym           DYNSYM          080481e0 0001e0 000150 10   A  5   1  4\n");
+printf("  [ 5] .dynstr           STRTAB          08048330 000330 0000bf 00   A  0   0  1\n");
+printf("  [ 6] .rel.got          REL             080483f0 0003f0 000030 08   A  4  16  4\n");
+printf("  [ 7] .rel.plt          REL             08048420 000420 000020 08   A  4   9  4\n");
+printf("  [ 8] .init             PROGBITS        08048440 000440 000030 00  AX  0   0  4\n");
+printf("  [ 9] .plt              PROGBITS        08048470 000470 000050 04  AX  0   0  4\n");
+printf("  [10] .text             PROGBITS        080484c0 0004c0 000304 00  AX  0   0  4\n");
+printf("  [11] .fini             PROGBITS        080487c4 0007c4 00001d 00  AX  0   0  4\n");
+printf("  [12] .rodata           PROGBITS        08048800 000800 0000a7 00   A  0   0 32\n");
+printf("  [13] .data             PROGBITS        080498a8 0008a8 000014 00  WA  0   0  4\n");
+printf("  [14] .ctors            PROGBITS        080498bc 0008bc 000008 00  WA  0   0  4\n");
+printf("  [15] .dtors            PROGBITS        080498c4 0008c4 000008 00  WA  0   0  4\n");
+printf("  [16] .got              PROGBITS        080498cc 0008cc 000034 04  WA  0   0  4\n");
+printf("  [17] .dynamic          DYNAMIC         08049900 000900 000088 08  WA  5   0  4\n");
+printf("  [18] .bss              NOBITS          08049988 000988 00000c 00  WA  0   0  4\n");
+printf("  [19] .note             NOTE            08049994 000988 000050 00      0   0  1\n");
+printf("  [20] .ident            PROGBITS        080499e4 0009d8 000035 00      0   0  1\n");
+printf("  [21] .shstrtab         STRTAB          00000000 000a0d 0000b1 00      0   0  1\n");
+printf("  [22] .symtab           SYMTAB          00000000 000e80 000390 10     23  27  4\n");
+printf("  [23] .strtab           STRTAB          00000000 001210 000125 00      0   0  1\n");
+printf("Key to Flags:\n");
+printf("  W (write), A (alloc), X (execute), M (merge), S (strings)\n");
+printf("  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)\n");
+printf("  O (extra OS processing required) o (OS specific), p (processor specific)\n");
+exit(EXIT_SUCCESS);
+}
+
+
 /**
  * main - Prints text according to readelf -W -h entries
  * @argc: Number of arguments passed
@@ -198,6 +237,8 @@ int main(int argc, char** argv)
 		dosolaris32();
 	else if (strncmp(argv[1], "sparcbigendian32", 16) == 0)
 		dosparcbigendian32();
+	else if (strncmp(argv[1], "sortix32", 8) == 0)
+		dosortix32();
 	for (i = 0; i < argc; i++)
 	{
 		printf("%d - %s\n", i, argv[i]);
