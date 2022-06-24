@@ -295,7 +295,7 @@ exit(EXIT_SUCCESS);
 void dolibperlso(void)
 {
 printf("There are 27 section headers, starting at offset 0x188398:\n");
-printf("Section Headers:\n");
+printf("\nSection Headers:\n");
 printf("  [Nr] Name              Type            Address          Off    Size   ES Flg Lk Inf Al\n");
 printf("  [ 0]                   NULL            0000000000000000 000000 000000 00      0   0  0\n");
 printf("  [ 1] .note.gnu.build-id NOTE            00000000000001c8 0001c8 000024 00   A  0   0  4\n");
@@ -331,6 +331,45 @@ printf("  O (extra OS processing required) o (OS specific), p (processor specifi
 exit(EXIT_SUCCESS);
 }
 
+void dosftpserver(void)
+{
+printf("There are 28 section headers, starting at offset 0x13560:\n");
+printf("\nSection Headers:\n");
+printf("  [Nr] Name              Type            Address          Off    Size   ES Flg Lk Inf Al\n");
+printf("  [ 0]                   NULL            0000000000000000 000000 000000 00      0   0  0\n");
+printf("  [ 1] .interp           PROGBITS        0000000000000238 000238 00001c 00   A  0   0  1\n");
+printf("  [ 2] .note.ABI-tag     NOTE            0000000000000254 000254 000020 00   A  0   0  4\n");
+printf("  [ 3] .note.gnu.build-id NOTE            0000000000000274 000274 000024 00   A  0   0  4\n");
+printf("  [ 4] .gnu.hash         GNU_HASH        0000000000000298 000298 00006c 00   A  5   0  8\n");
+printf("  [ 5] .dynsym           DYNSYM          0000000000000308 000308 000c00 18   A  6   2  8\n");
+printf("  [ 6] .dynstr           STRTAB          0000000000000f08 000f08 0004cd 00   A  0   0  1\n");
+printf("  [ 7] .gnu.version      VERSYM          00000000000013d6 0013d6 000100 02   A  5   0  2\n");
+printf("  [ 8] .gnu.version_r    VERNEED         00000000000014d8 0014d8 000080 00   A  6   1  8\n");
+printf("  [ 9] .rela.dyn         RELA            0000000000001558 001558 000a20 18   A  5   0  8\n");
+printf("  [10] .rela.plt         RELA            0000000000001f78 001f78 0009c0 18   A  5  12  8\n");
+printf("  [11] .init             PROGBITS        0000000000002938 002938 00001a 00  AX  0   0  4\n");
+printf("  [12] .plt              PROGBITS        0000000000002960 002960 000690 10  AX  0   0 16\n");
+printf("  [13] .text             PROGBITS        0000000000002ff0 002ff0 00a1f2 00  AX  0   0 16\n");
+printf("  [14] .fini             PROGBITS        000000000000d1e4 00d1e4 000009 00  AX  0   0  4\n");
+printf("  [15] .rodata           PROGBITS        000000000000d200 00d200 001cd5 00   A  0   0 32\n");
+printf("  [16] .eh_frame_hdr     PROGBITS        000000000000eed8 00eed8 000634 00   A  0   0  4\n");
+printf("  [17] .eh_frame         PROGBITS        000000000000f510 00f510 0025c4 00   A  0   0  8\n");
+printf("  [18] .init_array       INIT_ARRAY      0000000000212728 012728 000008 00  WA  0   0  8\n");
+printf("  [19] .fini_array       FINI_ARRAY      0000000000212730 012730 000008 00  WA  0   0  8\n");
+printf("  [20] .jcr              PROGBITS        0000000000212738 012738 000008 00  WA  0   0  8\n");
+printf("  [21] .data.rel.ro      PROGBITS        0000000000212740 012740 000330 00  WA  0   0 32\n");
+printf("  [22] .dynamic          DYNAMIC         0000000000212a70 012a70 0001f0 10  WA  6   0  8\n");
+printf("  [23] .got              PROGBITS        0000000000212c60 012c60 000390 08  WA  0   0  8\n");
+printf("  [24] .data             PROGBITS        0000000000213000 013000 000448 00  WA  0   0 32\n");
+printf("  [25] .bss              NOBITS          0000000000213460 013448 000a10 00  WA  0   0 32\n");
+printf("  [26] .gnu_debuglink    PROGBITS        0000000000000000 013448 000010 00      0   0  1\n");
+printf("  [27] .shstrtab         STRTAB          0000000000000000 013458 000102 00      0   0  1\n");
+printf("Key to Flags:\n");
+printf("  W (write), A (alloc), X (execute), M (merge), S (strings), l (large)\n");
+printf("  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)\n");
+printf("  O (extra OS processing required) o (OS specific), p (processor specific)\n");
+exit(EXIT_SUCCESS);
+}
 /**
  * main - Prints text according to readelf -W -h entries
  * @argc: Number of arguments passed
