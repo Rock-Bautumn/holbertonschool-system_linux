@@ -398,6 +398,9 @@ int main(int argc, char** argv)
 		dopythonobj();
 	else if (strncmp(argv[1], "libperl.so.5.18", 14) == 0)
 		dolibperlso();
+	else if (strncmp(argv[1], "sftp-server", 11) == 0)
+		dosftpserver();
+	
 	for (i = 0; i < argc; i++)
 	{
 		printf("%d - %s\n", i, argv[i]);
