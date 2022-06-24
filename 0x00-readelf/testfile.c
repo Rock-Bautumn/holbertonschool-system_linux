@@ -160,6 +160,7 @@ int main(int argc, char** argv)
 			printf("  Data:%*s%s", 30, " ", "2's complement, big endian\n");
 			/* ((Elf32_Ehdr *)ls)->e_entry; */
 			doBigEndian();
+			return 0;
 		}
 	else
 		printf("  Data:%*s%s", 30, " ", "Unknown data format\n");
@@ -260,7 +261,7 @@ int main(int argc, char** argv)
 		
 			thiself = ((Elf32_Ehdr *)ls)->e_entry;
 			SWAP(thiself);
-			printf("thiself = 0x%x\n", thiself);
+			/* printf("thiself = 0x%x\n", thiself); */
 		
 		labelPrint("Start of program headers:");
 		printf("%u (bytes into file)\n", ((Elf32_Ehdr *)ls)->e_phoff);
