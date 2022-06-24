@@ -88,7 +88,58 @@ void donetbsd32(void)
 	exit(EXIT_SUCCESS);
 }
 
+void dosolaris32(void)
+{
+	printf("There are 40 section headers, starting at offset 0x2c9f0:\n");
 
+	printf("\nSection Headers:\n");
+	printf("  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al\n");
+	printf("  [ 0]                   NULL            00000000 000000 000000 00      0   0  0\n");
+	printf("  [ 1] .interp           PROGBITS        080500f4 0000f4 000011 00   A  0   0  1\n");
+	printf("  [ 2] .eh_frame_hdr     PROGBITS        08050108 000108 00012c 00   A  0   0  4\n");
+	printf("  [ 3] .SUNW_syminfo     VERDEF          08050234 000234 0000c0 04  AI  6  20  4\n");
+	printf("  [ 4] .hash             HASH            080502f4 0002f4 000184 04   A  6   0  4\n");
+	printf("  [ 5] .SUNW_ldynsym     LOOS+ffffff3    08050478 000478 000570 10   A  7  87  4\n");
+	printf("  [ 6] .dynsym           DYNSYM          080509e8 0009e8 000300 10   A  7   1  4\n");
+	printf("  [ 7] .dynstr           STRTAB          08050ce8 000ce8 000c78 00  AS  0   0  1\n");
+	printf("  [ 8] .SUNW_version     VERNEED         08051960 001960 000080 01   A  7   3  4\n");
+	printf("  [ 9] .SUNW_versym      VERSYM          080519e0 0019e0 000060 02   A  6   0  4\n");
+	printf("  [10] .SUNW_dynsymsort  LOOS+ffffff1    08051a40 001a40 000148 04   A  5   0  4\n");
+	printf("  [11] .SUNW_reloc       REL             08051b88 001b88 000030 08   A  6   0  4\n");
+	printf("  [12] .rel.plt          REL             08051bb8 001bb8 0000b0 08  AI  6  19  4\n");
+	printf("  [13] .rodata           PROGBITS        08051c68 001c68 000624 00   A  0   0  4\n");
+	printf("  [14] .plt              PROGBITS        0805228c 00228c 000170 10  AX  0   0  4\n");
+	printf("  [15] .text             PROGBITS        08052400 002400 00585c 00  AX  0   0 16\n");
+	printf("  [16] .init             PROGBITS        08057c60 007c60 00001d 00  AX  0   0 16\n");
+	printf("  [17] .fini             PROGBITS        08057c80 007c80 000018 00  AX  0   0 16\n");
+	printf("  [18] .text.startup     PROGBITS        08057ca0 007ca0 00007c 00  AX  0   0 16\n");
+	printf("  [19] .got              PROGBITS        08067d1c 007d1c 000074 04  WA  0   0  4\n");
+	printf("  [20] .dynamic          DYNAMIC         08067d90 007d90 000360 08  WA  7   0  4\n");
+	printf("  [21] .eh_frame         PROGBITS        080680f0 0080f0 000790 00  WA  0   0  4\n");
+	printf("  [22] .data             PROGBITS        08068880 008880 0000c0 00  WA  0   0  8\n");
+	printf("  [23] .ctors            PROGBITS        08068940 008940 000008 00  WA  0   0  4\n");
+	printf("  [24] .dtors            PROGBITS        08068948 008948 000008 00  WA  0   0  4\n");
+	printf("  [25] .jcr              PROGBITS        08068950 008950 000004 00  WA  0   0  4\n");
+	printf("  [26] .tm_clone_table   PROGBITS        08068954 008954 000000 00  WA  0   0  4\n");
+	printf("  [27] .bss              NOBITS          08068960 008960 0001a8 00  WA  0   0 32\n");
+	printf("  [28] .symtab           SYMTAB          00000000 008954 001690 10     29 314  4\n");
+	printf("  [29] .strtab           STRTAB          00000000 009fe4 000d85 00   S  0   0  1\n");
+	printf("  [30] .comment          PROGBITS        00000000 00ad69 000058 01  MS  0   0  1\n");
+	printf("  [31] .debug_info       PROGBITS        00000000 00adc1 00b56c 00      0   0  1\n");
+	printf("  [32] .debug_abbrev     PROGBITS        00000000 01632d 0016c7 00      0   0  1\n");
+	printf("  [33] .debug_loc        PROGBITS        00000000 0179f4 00bd5c 00      0   0  1\n");
+	printf("  [34] .debug_aranges    PROGBITS        00000000 023750 000100 00      0   0  1\n");
+	printf("  [35] .debug_ranges     PROGBITS        00000000 023850 001150 00      0   0  1\n");
+	printf("  [36] .debug_line       PROGBITS        00000000 0249a0 002292 00      0   0  1\n");
+	printf("  [37] .debug_str        PROGBITS        00000000 026c32 004ff0 01  MS  0   0  1\n");
+	printf("  [38] .debug_frame      PROGBITS        00000000 02bc24 000c48 00      0   0  4\n");
+	printf("  [39] .shstrtab         STRTAB          00000000 02c86c 000181 00   S  0   0  1\n");
+	printf("Key to Flags:\n");
+	printf("  W (write), A (alloc), X (execute), M (merge), S (strings)\n");
+	printf("  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)\n");
+	printf("  O (extra OS processing required) o (OS specific), p (processor specific)\n");
+	exit(EXIT_SUCCESS);
+}
 /**
  * main - Prints text according to readelf -W -h entries
  * @argc: Number of arguments passed
@@ -105,7 +156,9 @@ int main(int argc, char** argv)
 		doUbuntu64();
 	else if (strncmp(argv[1], "netbsd32", 8) == 0)
 		donetbsd32();
-
+	else if (strncmp(argv[1], "solaris32", 9) == 0)
+		dosolaris32();
+	
 	for (i = 0; i < argc; i++)
 	{
 		printf("%d - %s\n", i, argv[i]);
