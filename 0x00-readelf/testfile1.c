@@ -196,7 +196,8 @@ int main(int argc, char** argv)
 		donetbsd32();
 	else if (strncmp(argv[1], "solaris32", 9) == 0)
 		dosolaris32();
-	
+	else if (strncmp(argv[1], "sparcbigendian32", 16) == 0)
+		dosparcbigendian32();
 	for (i = 0; i < argc; i++)
 	{
 		printf("%d - %s\n", i, argv[i]);
