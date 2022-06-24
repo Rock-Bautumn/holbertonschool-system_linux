@@ -5,16 +5,16 @@ ELF Header:
   Version:                           1 (current)
   OS/ABI:                            UNIX - System V
   ABI Version:                       0
-  Type:                              Unknown type
-  Machine:                           An unknown machine
-  Version:                           0x0
-  Entry point address:               0x200d0100
-  Start of program headers:          872415232 (bytes into file)
-  Start of section headers:          1347027200 (bytes into file)
+  Type:                              EXEC (Executable file)
+  Machine:                           Sparc
+  Version:                           0x1
+  Entry point address:               0x10d20
+  Start of program headers:          52 (bytes into file)
+  Start of section headers:          84560 (bytes into file)
   Flags:                             0x0
-  Size of this header:               13312 (bytes)
-  Size of program headers:           8192 (bytes)
-  Number of program headers:         1536
-  Size of section headers:           10240 (bytes)
-  Number of section headers:         6144
-  Section header string table index: 5888
+  Size of this header:               52 (bytes)
+  Size of program headers:           32 (bytes)
+  Number of program headers:         6
+  Size of section headers:           40 (bytes)
+  Number of section headers:         24
+  Section header string table index: 23

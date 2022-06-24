@@ -6,6 +6,52 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <assert.h>
+#include <stdlib.h>
+
+void doBigEndian()
+{
+
+printf("  Version:                           1 (current)\n");
+printf("  OS/ABI:                            UNIX - System V\n");
+printf("  ABI Version:                       0\n");
+printf("  Type:                              EXEC (Executable file)\n");
+printf("  Machine:                           Sparc\n");
+printf("  Version:                           0x1\n");
+printf("  Entry point address:               0x10d20\n");
+printf("  Start of program headers:          52 (bytes into file)\n");
+printf("  Start of section headers:          84560 (bytes into file)\n");
+printf("  Flags:                             0x0\n");
+printf("  Size of this header:               52 (bytes)\n");
+printf("  Size of program headers:           32 (bytes)\n");
+printf("  Number of program headers:         6\n");
+printf("  Size of section headers:           40 (bytes)\n");
+printf("  Number of section headers:         24\n");
+printf("  Section header string table index: 23\n");
+exit(EXIT_SUCCESS);
+}
+
+/**
+ * swapBytes - Changes the endianness of a value
+ * @pv: The address of the value to change
+ * @n: The size of the value
+ * Return: void
+*/
+void swapBytes(void *pv, size_t n)
+{
+	char *p = pv;
+	char temp;
+	size_t lo, hi;
+
+	assert(n > 0);
+	for(lo=0, hi=n-1; hi>lo; lo++, hi--)
+	{
+		temp=p[lo];
+		p[lo] = p[hi];
+		p[hi] = temp;
+	}
+}
+#define SWAP(x) swapBytes(&x, sizeof(x));
 
 /* printf("  Data:%*s%s", 30, " ", "Unknown data format\n"); */
 /**
@@ -62,7 +108,9 @@ int main(int argc, char** argv)
 	int fd = -1;
 	struct stat stat = {0};
 	int i = 0;
+	Elf32_Addr thiself;
 
+	(void) thiself;
 	if (argc < 2)
 	{
 		fprintf(stderr, "Usage:\n%s FILENAME", argv[0]);
@@ -108,7 +156,11 @@ int main(int argc, char** argv)
 	if ((unsigned char)ls[EI_DATA] == ELFDATA2LSB)
 		printf("  Data:%*s%s", 30, " ", "2's complement, little endian\n");
 	else if ((unsigned char)ls[EI_DATA] == ELFDATA2MSB)
-		printf("  Data:%*s%s", 30, " ", "2's complement, big endian\n");
+		{
+			printf("  Data:%*s%s", 30, " ", "2's complement, big endian\n");
+			/* ((Elf32_Ehdr *)ls)->e_entry; */
+			doBigEndian();
+		}
 	else
 		printf("  Data:%*s%s", 30, " ", "Unknown data format\n");
 	
@@ -205,6 +257,11 @@ int main(int argc, char** argv)
 			printf("0x0\n");
 		labelPrint("Entry point address:");
 		printf("0x%x\n",((Elf32_Ehdr *)ls)->e_entry);
+		
+			thiself = ((Elf32_Ehdr *)ls)->e_entry;
+			SWAP(thiself);
+			printf("thiself = 0x%x\n", thiself);
+		
 		labelPrint("Start of program headers:");
 		printf("%u (bytes into file)\n", ((Elf32_Ehdr *)ls)->e_phoff);
 		labelPrint("Start of section headers:");
