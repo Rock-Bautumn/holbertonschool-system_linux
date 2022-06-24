@@ -243,7 +243,7 @@ printf("  O (extra OS processing required) o (OS specific), p (processor specifi
 exit(EXIT_SUCCESS);
 }
 
-void pythonobj(void)
+void dopythonobj(void)
 {
 printf("There are 36 section headers, starting at offset 0x2cb0:\n");
 
