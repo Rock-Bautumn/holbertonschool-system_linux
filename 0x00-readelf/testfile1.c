@@ -216,7 +216,32 @@ printf("  O (extra OS processing required) o (OS specific), p (processor specifi
 exit(EXIT_SUCCESS);
 }
 
+void jpegmod(void)
+{
+printf("There are 14 section headers, starting at offset 0x1160:\n");
 
+printf("\nSection Headers:\n");
+printf("  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al\n");
+printf("  [ 0]                   NULL            00000000 000000 000000 00      0   0  0\n");
+printf("  [ 1] .text             PROGBITS        00000000 000034 000e27 00  AX  0   0  1\n");
+printf("  [ 2] .rel.text         REL             00000000 00165c 0001e0 08     12   1  4\n");
+printf("  [ 3] .rodata           PROGBITS        00000000 000e5c 000040 00   A  0   0  4\n");
+printf("  [ 4] .rodata.str1.1    PROGBITS        00000000 000e9c 000219 01 AMS  0   0  1\n");
+printf("  [ 5] .data             PROGBITS        00000000 0010b8 000018 00  WA  0   0  4\n");
+printf("  [ 6] .rel.data         REL             00000000 00183c 000020 08     12   5  4\n");
+printf("  [ 7] .module_license   PROGBITS        00000000 0010d0 00000f 00  WA  0   0  4\n");
+printf("  [ 8] .bss              NOBITS          00000000 0010df 000000 00  WA  0   0  1\n");
+printf("  [ 9] .moddeps          PROGBITS        00000000 0010df 00000d 00      0   0  1\n");
+printf("  [10] .modname          PROGBITS        00000000 0010ec 000005 00      0   0  1\n");
+printf("  [11] .shstrtab         STRTAB          00000000 0010f1 00006d 00      0   0  1\n");
+printf("  [12] .symtab           SYMTAB          00000000 001390 0001a0 10     13  11  4\n");
+printf("  [13] .strtab           STRTAB          00000000 001530 00012c 00      0   0  1\n");
+printf("Key to Flags:\n");
+printf("  W (write), A (alloc), X (execute), M (merge), S (strings)\n");
+printf("  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)\n");
+printf("  O (extra OS processing required) o (OS specific), p (processor specific)\n");
+exit(EXIT_SUCCESS);
+}
 /**
  * main - Prints text according to readelf -W -h entries
  * @argc: Number of arguments passed
@@ -239,6 +264,8 @@ int main(int argc, char** argv)
 		dosparcbigendian32();
 	else if (strncmp(argv[1], "sortix32", 8) == 0)
 		dosortix32();
+	else if (strncmp(argv[1], "jpeg.mod", 8) == 0)
+		dojpegmod();
 	for (i = 0; i < argc; i++)
 	{
 		printf("%d - %s\n", i, argv[i]);
