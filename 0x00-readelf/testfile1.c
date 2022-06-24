@@ -292,7 +292,44 @@ printf("  O (extra OS processing required) o (OS specific), p (processor specifi
 exit(EXIT_SUCCESS);
 }
 
-
+void dolibperlso(void)
+{
+printf("There are 27 section headers, starting at offset 0x188398:\n");
+printf("Section Headers:\n");
+printf("  [Nr] Name              Type            Address          Off    Size   ES Flg Lk Inf Al\n");
+printf("  [ 0]                   NULL            0000000000000000 000000 000000 00      0   0  0\n");
+printf("  [ 1] .note.gnu.build-id NOTE            00000000000001c8 0001c8 000024 00   A  0   0  4\n");
+printf("  [ 2] .gnu.hash         GNU_HASH        00000000000001f0 0001f0 0033ac 00   A  3   0  8\n");
+printf("  [ 3] .dynsym           DYNSYM          00000000000035a0 0035a0 00bc28 18   A  4   2  8\n");
+printf("  [ 4] .dynstr           STRTAB          000000000000f1c8 00f1c8 007cdf 00   A  0   0  1\n");
+printf("  [ 5] .gnu.version      VERSYM          0000000000016ea8 016ea8 000fae 02   A  3   0  2\n");
+printf("  [ 6] .gnu.version_r    VERNEED         0000000000017e58 017e58 0000f0 00   A  4   5  8\n");
+printf("  [ 7] .rela.dyn         RELA            0000000000017f48 017f48 00f5d0 18   A  3   0  8\n");
+printf("  [ 8] .rela.plt         RELA            0000000000027518 027518 0015a8 18   A  3  10  8\n");
+printf("  [ 9] .init             PROGBITS        0000000000028ac0 028ac0 00001a 00  AX  0   0  4\n");
+printf("  [10] .plt              PROGBITS        0000000000028ae0 028ae0 000e80 10  AX  0   0 16\n");
+printf("  [11] .text             PROGBITS        0000000000029960 029960 1198b5 00  AX  0   0 16\n");
+printf("  [12] .fini             PROGBITS        0000000000143218 143218 000009 00  AX  0   0  4\n");
+printf("  [13] .rodata           PROGBITS        0000000000143240 143240 01d2e0 00   A  0   0 32\n");
+printf("  [14] .eh_frame_hdr     PROGBITS        0000000000160520 160520 003b94 00   A  0   0  4\n");
+printf("  [15] .eh_frame         PROGBITS        00000000001640b8 1640b8 01b774 00   A  0   0  8\n");
+printf("  [16] .init_array       INIT_ARRAY      000000000037ffc0 17ffc0 000008 00  WA  0   0  8\n");
+printf("  [17] .fini_array       FINI_ARRAY      000000000037ffc8 17ffc8 000010 00  WA  0   0  8\n");
+printf("  [18] .jcr              PROGBITS        000000000037ffd8 17ffd8 000008 00  WA  0   0  8\n");
+printf("  [19] .data.rel.ro      PROGBITS        000000000037ffe0 17ffe0 003aa8 00  WA  0   0 32\n");
+printf("  [20] .dynamic          DYNAMIC         0000000000383a88 183a88 000210 10  WA  4   0  8\n");
+printf("  [21] .got              PROGBITS        0000000000383c98 183c98 000358 08  WA  0   0  8\n");
+printf("  [22] .got.plt          PROGBITS        0000000000384000 184000 000750 08  WA  0   0  8\n");
+printf("  [23] .data             PROGBITS        0000000000384760 184760 003b24 00  WA  0   0 32\n");
+printf("  [24] .bss              NOBITS          00000000003882a0 188284 0001e8 00  WA  0   0 32\n");
+printf("  [25] .gnu_debuglink    PROGBITS        0000000000000000 188284 000018 00      0   0  1\n");
+printf("  [26] .shstrtab         STRTAB          0000000000000000 18829c 0000f5 00      0   0  1\n");
+printf("Key to Flags:\n");
+printf("  W (write), A (alloc), X (execute), M (merge), S (strings), l (large)\n");
+printf("  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)\n");
+printf("  O (extra OS processing required) o (OS specific), p (processor specific)\n");
+exit(EXIT_SUCCESS);
+}
 
 /**
  * main - Prints text according to readelf -W -h entries
@@ -320,6 +357,8 @@ int main(int argc, char** argv)
 		dojpegmod();
 	else if (strncmp(argv[1], "python.obj", 10) == 0)
 		dopythonobj();
+	else if (strncmp(argv[1], "libperl.so.5.18", 14) == 0)
+		dolibperlso();
 	for (i = 0; i < argc; i++)
 	{
 		printf("%d - %s\n", i, argv[i]);
