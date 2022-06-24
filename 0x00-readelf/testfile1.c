@@ -50,6 +50,7 @@ void doUbuntu64(void)
 	printf("  L (link order), O (extra OS processing required), G (group), T (TLS),\n");
 	printf("  C (compressed), x (unknown), o (OS specific), E (exclude),\n");
 	printf("  l (large), p (processor specific)\n");
+	exit(EXIT_SUCCESS);
 }
 
 
@@ -65,7 +66,7 @@ int main(int argc, char** argv)
 	if (argc < 2)
 		fprintf(stderr, "Usage:\n%s FILENAME", argv[0]);
 	
-	if (strncmp(argv[1], "ubuntu64", 8))
+	if (strncmp(argv[1], "ubuntu64", 8) == 0)
 		doUbuntu64();
 	for (i = 0; i < argc; i++)
 	{
