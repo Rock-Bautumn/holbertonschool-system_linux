@@ -242,7 +242,7 @@ int print_shdr32(char *p) {
 		sh_strtab_p + shdr[i].sh_name);
 
 		printf("%-16s", sht_str32(shtype));
-		printf("%016x ", shdr[i].sh_addr);
+		printf("%08x ", shdr[i].sh_addr);
 		printf("%06x ", shdr[i].sh_offset);
 		printf("%06x ", shdr[i].sh_size);
 		printf("%02x ", shdr[i].sh_entsize);
