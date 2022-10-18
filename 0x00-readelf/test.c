@@ -109,6 +109,8 @@ int main(int argc, char** argv)
 	struct stat stat = {0};
 	int i = 0;
 	Elf32_Addr thiself;
+	Elf64_Shdr *thisSHelf, *stringTable;
+
 
 	(void) thiself;
 	if (argc < 2)
@@ -199,33 +201,24 @@ int main(int argc, char** argv)
 			printf("Sparc\n");
 		else
 			printf("Unknown Type\n");
-		labelPrint("Version:");
-		if (EV_CURRENT == (unsigned char) ((Elf64_Ehdr *)ls)->e_version)
-			printf("0x1\n");
-		else
-			printf("0x0\n");
-		labelPrint("Entry point address:");
-		printf("0x%lx\n", ((Elf64_Ehdr *)ls)->e_entry);
-		/* printf("Entry point address: %p\n", (void *)((Elf64_Ehdr *)ls)->e_entry); */
-		labelPrint("Start of program headers:");
-		printf("%lu (bytes into file)\n", ((Elf64_Ehdr *)ls)->e_phoff);
 		labelPrint("Start of section headers:");
 		printf("%lu (bytes into file)\n", ((Elf64_Ehdr *)ls)->e_shoff);
-		labelPrint("Flags:");
-		printf("0x%u\n", ((Elf64_Ehdr *)ls)->e_flags);
-		labelPrint("Size of this header:");
-		printf("%u (bytes)\n", ((Elf64_Ehdr *)ls)->e_ehsize);
-		labelPrint("Size of program headers:");
-		printf("%u (bytes)\n", ((Elf64_Ehdr *)ls)->e_phentsize);
-		labelPrint("Number of program headers:");
-		printf("%u\n", ((Elf64_Ehdr *)ls)->e_phnum);
-		labelPrint("Size of section headers:");
-		printf("%u (bytes)\n", ((Elf64_Ehdr *)ls)->e_shentsize);
-		labelPrint("Number of section headers:");
-		printf("%u\n", ((Elf64_Ehdr *)ls)->e_shnum);
-		labelPrint("Section header string table index:");
-		printf("%u\n", ((Elf64_Ehdr *)ls)->e_shstrndx);
+		printf("Number of section headers: %d\n", ((Elf64_Ehdr *)ls)->e_shnum);
+		printf("Index of string table: %d\n", ((Elf64_Ehdr *)ls)->e_shstrndx);
 
+		/*stringTable = (void *) (ls + ((Elf64_Ehdr *)ls)->e_shoff + (sizeof(Elf64_Shdr) * ((Elf64_Ehdr *)ls)->e_shstrndx));*/
+		stringTable = (void *) (ls + ((((Elf64_Ehdr *)ls)->e_shentsize * ((Elf64_Ehdr *)ls)->e_shstrndx) + ((Elf64_Ehdr *)ls)->e_shoff));
+		printf("String Table Entry: %s\n", (char *)(&stringTable[0]));
+
+		for (i = 0; i < ((Elf64_Ehdr *)ls)->e_shnum; i++)
+		{
+			thisSHelf = (void *) (ls + ((Elf64_Ehdr *)ls)->e_shoff + (sizeof(Elf64_Shdr) * i));
+			printf("ADDR: %p ----->ADDR: %ld\n", (void*)thisSHelf, thisSHelf->sh_addr);
+		}
+		/*
+		if (SHT_NULL == thisSHelf->sh_type)
+			printf("NULL SH_TYPE\n");
+		*/
 	}
 	else if ((unsigned char)ls[EI_CLASS] == ELFCLASS32)
 	{
@@ -263,24 +256,9 @@ int main(int argc, char** argv)
 			SWAP(thiself);
 			/* printf("thiself = 0x%x\n", thiself); */
 		
-		labelPrint("Start of program headers:");
-		printf("%u (bytes into file)\n", ((Elf32_Ehdr *)ls)->e_phoff);
 		labelPrint("Start of section headers:");
 		printf("%u (bytes into file)\n", ((Elf32_Ehdr *)ls)->e_shoff);
-		labelPrint("Flags:");
-		printf("0x%u\n", ((Elf32_Ehdr *)ls)->e_flags);
-		labelPrint("Size of this header:");
-		printf("%u (bytes)\n", ((Elf32_Ehdr *)ls)->e_ehsize);
-		labelPrint("Size of program headers:");
-		printf("%u (bytes)\n", ((Elf32_Ehdr *)ls)->e_phentsize);
-		labelPrint("Number of program headers:");
-		printf("%u\n", ((Elf32_Ehdr *)ls)->e_phnum);
-		labelPrint("Size of section headers:");
-		printf("%u (bytes)\n", ((Elf32_Ehdr *)ls)->e_shentsize);
-		labelPrint("Number of section headers:");
-		printf("%u\n", ((Elf32_Ehdr *)ls)->e_shnum);
-		labelPrint("Section header string table index:");
-		printf("%u\n", ((Elf32_Ehdr *)ls)->e_shstrndx);
+		
 	}
 	/* close file descriptors and free memory before the program exits */
 	cleanup:
