@@ -144,7 +144,11 @@ char *flg_to_str64(char *retval, Elf64_Xword flags)
 			retval[i] = 'I';
 			i++;
 	}
-
+	if (SHF_EXCLUDE & flags)
+	{
+			retval[i] = 'E';
+			i++;
+	}
 	return retval;
 }
 
