@@ -37,11 +37,16 @@ char *sht_str64(Elf64_Word shtype)
 		return ("NOBITS");
 	case SHT_SYMTAB:
 		return ("SYMTAB");
+	case SHT_REL:
+		return ("REL");
+	case SHT_HASH:
+		return ("HASH");
 	case SHT_NULL:
 		return ("NULL");
 	default:
 		break;
 	}
+
 	return (NULL);
 }
 
