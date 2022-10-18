@@ -167,10 +167,19 @@ char *flg_to_str32(char *retval, Elf32_Xword flags)
 
 	return retval;
 }
-void print_keyflag_legend(void)
+void print_keyflag_legend64(void)
 {
 	printf("Key to Flags:\n  W (write), A (alloc), X (execute), ");
 	printf("M (merge), S (strings), l (large)\n  I (info), L ");
+	printf("(link order), G (group), T (TLS), E (exclude), x (unknown)\n");
+	printf("  O (extra OS processing required) o (OS specific), ");
+	printf("p (processor specific)\n");
+}
+
+void print_keyflag_legend32(void)
+{
+	printf("Key to Flags:\n  W (write), A (alloc), X (execute), ");
+	printf("M (merge), S (strings)\n  I (info), L ");
 	printf("(link order), G (group), T (TLS), E (exclude), x (unknown)\n");
 	printf("  O (extra OS processing required) o (OS specific), ");
 	printf("p (processor specific)\n");
@@ -207,7 +216,7 @@ int print_shdr64(char *p) {
 		printf("%3d ", shdr[i].sh_info);
 		printf("%2ld\n", shdr[i].sh_addralign);
 	}
-	print_keyflag_legend();
+	print_keyflag_legend64();
 	return 0;
 }
 
@@ -224,7 +233,7 @@ int print_shdr32(char *p) {
 	printf("There are %d section headers, starting at offset 0x%x:\n",
 		shnum, ehdr->e_shoff);
 	printf("\nSection Headers:\n");
-	printf("  [Nr] Name              Type            Address          ");
+	printf("  [Nr] Name              Type            Addr             ");
 	printf("Off    Size   ES Flg Lk Inf Al\n");
 	for (i = 0; i < shnum; ++i) {
 		memcpy(retval, "\0\0\0\0", 4);
@@ -242,7 +251,7 @@ int print_shdr32(char *p) {
 		printf("%3d ", shdr[i].sh_info);
 		printf("%2d\n", shdr[i].sh_addralign);
 	}
-	print_keyflag_legend();
+	print_keyflag_legend32();
 	return 0;
 }
 
