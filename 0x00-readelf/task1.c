@@ -14,7 +14,7 @@ char *sht_str64(Elf64_Word shtype)
 	case SHT_PROGBITS:
 		return ("PROGBITS");
 	case SHT_DYNSYM:
-		return ("DYMSYM");
+		return ("DYNSYM");
 	case SHT_NOTE:
 		return ("NOTE");
 	case SHT_GNU_HASH:
@@ -57,7 +57,7 @@ char *sht_str32(Elf32_Word shtype)
 	case SHT_PROGBITS:
 		return ("PROGBITS");
 	case SHT_DYNSYM:
-		return ("DYMSYM");
+		return ("DYNSYM");
 	case SHT_NOTE:
 		return ("NOTE");
 	case SHT_GNU_HASH:
@@ -205,7 +205,7 @@ int print_shdr64(char *p) {
 		printf("%3s ", flg_to_str64(retval, shdr[i].sh_flags));
 		printf("%2d ", shdr[i].sh_link);
 		printf("%3d ", shdr[i].sh_info);
-		printf("%2ld \n", shdr[i].sh_addralign);
+		printf("%2ld\n", shdr[i].sh_addralign);
 	}
 	print_keyflag_legend();
 	return 0;
@@ -240,7 +240,7 @@ int print_shdr32(char *p) {
 		printf("%3s ", flg_to_str32(retval, shdr[i].sh_flags));
 		printf("%2d ", shdr[i].sh_link);
 		printf("%3d ", shdr[i].sh_info);
-		printf("%2d \n", shdr[i].sh_addralign);
+		printf("%2d\n", shdr[i].sh_addralign);
 	}
 	print_keyflag_legend();
 	return 0;
