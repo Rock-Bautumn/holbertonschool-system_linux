@@ -6,7 +6,31 @@
 #include <fcntl.h>
 #include <string.h>
 
-
+char *phtype_to_str64(Elf64_Word phtype)
+{
+	switch (phtype)
+	{
+	case PT_PHDR:
+		return ("PHDR");
+	case PT_LOAD:
+		return ("LOAD");
+	case PT_DYNAMIC:
+		return ("DYNAMIC");
+	case PT_NOTE:
+		return ("NOTE");
+	case PT_GNU_EH_FRAME:
+		return ("GNU_EH_FRAME");
+	case PT_GNU_STACK:
+		return ("GNU_STACK");
+	case PT_GNU_RELRO:
+		return ("GNU_RELRO");
+	case PT_INTERP:
+		return ("INTERP");
+	default:
+		break;
+	}
+	return (NULL);
+}
 
 int print_phdr64(char *p) {
 	Elf64_Ehdr *ehdr = (Elf64_Ehdr*)p;
@@ -23,10 +47,16 @@ int print_phdr64(char *p) {
 
 	for (i = 0; i < phnum; ++i)
 	{
-		printf("  %-13s  ", "PHDR");
-		printf("0x%06x ", phdr[i].p_type);
-		printf("0x%016lx\n", phdr[i].p_offset);
-		
+		printf("  %-13s  ", phtype_to_str64(phdr[i].p_type));
+		printf("0x%06lx ", phdr[i].p_offset);
+		printf("0x%016lx ", phdr[i].p_vaddr);
+		printf("0x%016lx ", phdr[i].p_paddr);
+		printf("0x%06lx ", phdr[i].p_filesz);
+		printf("0x%06lx ", phdr[i].p_memsz);
+		printf("%s ", "RWE");
+		printf("0x%lx", phdr[i].p_align);
+				
+		printf("\n");
 	}
 
 	return 0;
