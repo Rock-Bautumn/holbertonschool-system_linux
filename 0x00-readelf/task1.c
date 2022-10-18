@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <string.h>
-
+#include "shtypes.h"
 
 char *sht_str64(Elf64_Word shtype)
 {
@@ -50,6 +50,23 @@ char *sht_str64(Elf64_Word shtype)
 	return (NULL);
 }
 
+char *sht_str32II(Elf32_Word shtype)
+{
+	switch (shtype)
+	{
+	case SHT_SUNW_syminfo:
+		return ("VERDEF");
+	case SHT_SUNW_dynsymsort:
+		return ("LOOS+ffffff1");
+	case SHT_SUNW_ldynsym:
+		return ("LOOS+ffffff3");
+	default:
+		printf("0x%x", shtype);
+		return "\0";
+	}
+	return (NULL);
+}
+
 char *sht_str32(Elf32_Word shtype)
 {
 	switch (shtype)
@@ -87,10 +104,11 @@ char *sht_str32(Elf32_Word shtype)
 	case SHT_HASH:
 		return ("HASH");
 	default:
-		break;
+		return (sht_str32II(shtype));
 	}
 	return (NULL);
 }
+
 
 char *flg_to_str64(char *retval, Elf64_Xword flags)
 {
