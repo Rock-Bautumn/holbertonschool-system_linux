@@ -233,7 +233,7 @@ int print_shdr32(char *p) {
 	printf("There are %d section headers, starting at offset 0x%x:\n",
 		shnum, ehdr->e_shoff);
 	printf("\nSection Headers:\n");
-	printf("  [Nr] Name              Type            Addr             ");
+	printf("  [Nr] Name              Type            Addr     ");
 	printf("Off    Size   ES Flg Lk Inf Al\n");
 	for (i = 0; i < shnum; ++i) {
 		memcpy(retval, "\0\0\0\0", 4);
