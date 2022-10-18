@@ -1,0 +1,11 @@
+#meta
+
+# .gitignore
+
+#testing files
+elf_files/
+TEST*
+
+#output files
+a.out
+*.o

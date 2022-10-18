@@ -9,7 +9,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-void doBigEndian()
+void doBigEndian(void)
 {
 
 printf("  Version:                           1 (current)\n");
