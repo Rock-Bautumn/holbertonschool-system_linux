@@ -85,6 +85,8 @@ char *phtype_to_str32(Elf32_Word phtype)
 		return ("GNU_RELRO");
 	case PT_INTERP:
 		return ("INTERP");
+	case 0x6464e550:
+		return ("LOOS+6464e550");
 	default:
 		break;
 	}
@@ -191,6 +193,12 @@ int print_phdr64(char *p) {
 	int i = 0;
 	char phtype[4] = "   \0";
 
+	if (phnum == 0)
+	{
+		printf("\nThere are no program headers in this file.\n\n");
+		return 1;
+	}
+
 	printf("\nElf file type is %s\n", etype_to_str64(ehdr->e_type));
 	printf("Entry point 0x%lx\nThere are ", ehdr->e_entry);
 	printf("%d program headers, starting at offset %ld", phnum, phoff);
@@ -226,11 +234,17 @@ int print_phdr32(char *p) {
 	int i = 0;
 	char phtype[4] = "   \0";
 
+	if (phnum == 0)
+	{
+		printf("\nThere are no program headers in this file.\n\n");
+		return 1;
+	}
+
 	printf("\nElf file type is %s\n", etype_to_str32(ehdr->e_type));
 	printf("Entry point 0x%x\nThere are ", ehdr->e_entry);
 	printf("%d program headers, starting at offset %d", phnum, phoff);
 	printf("\n\nProgram Headers:\n  Type           Offset   VirtAddr");
-	printf("   PhysAddr   FileSiz  MemSiz   Flg Align\n");
+	printf("   PhysAddr   FileSiz MemSiz  Flg Align\n");
 
 	for (i = 0; i < phnum; ++i)
 	{
