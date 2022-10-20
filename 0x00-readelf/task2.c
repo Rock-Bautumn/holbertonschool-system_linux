@@ -230,7 +230,7 @@ int print_phdr32(char *p) {
 	printf("Entry point 0x%x\nThere are ", ehdr->e_entry);
 	printf("%d program headers, starting at offset %d", phnum, phoff);
 	printf("\n\nProgram Headers:\n  Type           Offset   VirtAddr");
-	printf("           PhysAddr           FileSiz  MemSiz   Flg Align\n");
+	printf("   PhysAddr   FileSiz  MemSiz   Flg Align\n");
 
 	for (i = 0; i < phnum; ++i)
 	{
@@ -238,10 +238,13 @@ int print_phdr32(char *p) {
 		printf("0x%06x ", phdr[i].p_offset);
 		printf("0x%08x ", phdr[i].p_vaddr);
 		printf("0x%08x ", phdr[i].p_paddr);
-		printf("0x%06x ", phdr[i].p_filesz);
-		printf("0x%06x ", phdr[i].p_memsz);
+		printf("0x%05x ", phdr[i].p_filesz);
+		printf("0x%05x ", phdr[i].p_memsz);
 		printf("%s ", phflag_to_str32(phdr[i].p_flags, phtype));
-		printf("0x%x", phdr[i].p_align);
+		if (phdr[i].p_align == 0)
+			printf("0");
+		else
+			printf("0x%x", phdr[i].p_align);
 		printf("\n");
 		if (phdr[i].p_type == PT_INTERP)
 		{
