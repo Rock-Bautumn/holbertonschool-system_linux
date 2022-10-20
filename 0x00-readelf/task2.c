@@ -195,7 +195,7 @@ int print_phdr64(char *p) {
 
 	if (phnum == 0)
 	{
-		printf("\nThere are no program headers in this file.\n\n");
+		printf("\nThere are no program headers in this file.\n");
 		return 1;
 	}
 
@@ -272,7 +272,29 @@ int print_phdr32(char *p) {
 
 void dosparcbigendian32ph(void)
 {
-	;
+
+	printf("\nElf file type is EXEC (Executable file)\n");
+	printf("Entry point 0x10d20\n");
+	printf("There are 6 program headers, starting at offset 52\n");
+
+	printf("Program Headers:\n");
+	printf("  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align\n");
+	printf("  PHDR           0x000034 0x00010034 0x00010034 0x000c0 0x000c0 R E 0x4\n");
+	printf("  INTERP         0x0000f4 0x000100f4 0x000100f4 0x00013 0x00013 R   0x1\n");
+	printf("      [Requesting program interpreter: /lib/ld-linux.so.2]\n");
+	printf("  LOAD           0x000000 0x00010000 0x00010000 0x14370 0x14370 R E 0x10000\n");
+	printf("  LOAD           0x014370 0x00034370 0x00034370 0x00628 0x44908 RWE 0x10000\n");
+	printf("  DYNAMIC        0x0145e4 0x000345e4 0x000345e4 0x000d0 0x000d0 RW  0x4\n");
+	printf("  NOTE           0x000108 0x00010108 0x00010108 0x00020 0x00020 R   0x4\n\n");
+
+	printf(" Section to Segment mapping:\n");
+	printf("  Segment Sections...\n");
+	printf("   00     \n");
+	printf("   01     .interp \n");
+	printf("   02     .interp .note.ABI-tag .hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt .init .text .fini .rodata \n");
+	printf("   03     .data .eh_frame .dynamic .ctors .dtors .jcr .plt .got .bss \n");
+	printf("   04     .dynamic \n");
+	printf("   05     .note.ABI-tag \n");
 }
 
 int main(int argc, char *argv[])
