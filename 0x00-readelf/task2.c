@@ -86,7 +86,7 @@ char *phtype_to_str32(Elf32_Word phtype)
 	case PT_INTERP:
 		return ("INTERP");
 	case 0x6464e550:
-		return ("LOOS+6464e550");
+		return ("LOOS+464e550");
 	default:
 		break;
 	}
@@ -236,7 +236,7 @@ int print_phdr32(char *p) {
 
 	if (phnum == 0)
 	{
-		printf("\nThere are no program headers in this file.\n\n");
+		printf("\nThere are no program headers in this file.\n");
 		return 1;
 	}
 
