@@ -7,6 +7,12 @@
 #include <string.h>
 
 
+/**
+ * etype_to_str64 - Find the string output for a given elf type, 64 bit
+ * @etype: the elf type from ehdr
+ * Return: The string of the etype
+*/
+
 char *etype_to_str64(Elf64_Half etype)
 {
 	if (ET_CORE == etype)
@@ -23,6 +29,12 @@ char *etype_to_str64(Elf64_Half etype)
 		return("Something weird");
 }
 
+/**
+ * etype_to_str32 - Find the string output for a given elf type, 32 bit
+ * @etype: the elf type from ehdr
+ * Return: The string of the etype
+*/
+
 char *etype_to_str32(Elf32_Half etype)
 {
 	if (ET_CORE == etype)
@@ -38,6 +50,13 @@ char *etype_to_str32(Elf32_Half etype)
 	else
 		return("Something weird");
 }
+
+/**
+ * phtype_to_str64 - Find the string output for a given program header type
+ * @phtype: the program header type from phdr, 64 bits
+ * Return: The string of the phtype
+*/
+
 
 char *phtype_to_str64(Elf64_Word phtype)
 {
@@ -64,6 +83,12 @@ char *phtype_to_str64(Elf64_Word phtype)
 	}
 	return (NULL);
 }
+
+/**
+ * phtype_to_str32 - Find the string output for a given program header type
+ * @phtype: the program header type from phdr, 32 bits
+ * Return: The string of the phtype
+*/
 
 char *phtype_to_str32(Elf32_Word phtype)
 {
@@ -93,6 +118,13 @@ char *phtype_to_str32(Elf32_Word phtype)
 	return (NULL);
 }
 
+/**
+ * phflag_to_str64 - Generate the output string of phflags
+ * @phflag: the program header flag from phdr, 64 bits
+ * @phtype: the output string address
+ * Return: The string of the phflag
+*/
+
 char *phflag_to_str64(Elf64_Word phflag, char *phtype)
 {
 	memcpy(phtype, "   ", 4);
@@ -105,6 +137,13 @@ char *phflag_to_str64(Elf64_Word phflag, char *phtype)
 	return phtype;
 }
 
+/**
+ * phflag_to_str32 - Generate the output string of phflags
+ * @phflag: the program header flag from phdr, 32 bits
+ * @phtype: the output string address
+ * Return: The string of the phflag
+*/
+
 char *phflag_to_str32(Elf32_Word phflag, char *phtype)
 {
 	memcpy(phtype, "   ", 4);
@@ -116,6 +155,12 @@ char *phflag_to_str32(Elf32_Word phflag, char *phtype)
 		phtype[2] = 'E';
 	return phtype;
 }
+
+/**
+ * print_segments64 - Generate the output from segments, 64 bit
+ * @p: The first byte of the elf file, 64 bit
+ * Return: void
+*/
 
 void print_segments64(char *p)
 {
@@ -150,6 +195,11 @@ void print_segments64(char *p)
 		printf("\n");
 	}
 }
+/**
+ * print_segments32 - Generate the output from segments, 32 bit
+ * @p: The first byte of the elf file
+ * Return: void
+*/
 
 void print_segments32(char *p)
 {
@@ -184,6 +234,13 @@ void print_segments32(char *p)
 		printf("\n");
 	}
 }
+
+/**
+ * print_phdr64 - Generate the output from program headers, 64 bit
+ * @p: The first byte of the elf file
+ * Return: 0 if success, 1 if no headers
+*/
+
 
 int print_phdr64(char *p) {
 	Elf64_Ehdr *ehdr = (Elf64_Ehdr*)p;
@@ -225,6 +282,13 @@ int print_phdr64(char *p) {
 	print_segments64(p);
 	return 0;
 }
+
+/**
+ * print_phdr32 - Generate the output from program headers, 32 bit
+ * @p: The first byte of the elf file
+ * Return: 0 if success, 1 if no headers
+*/
+
 
 int print_phdr32(char *p) {
 	Elf32_Ehdr *ehdr = (Elf32_Ehdr*)p;
@@ -270,12 +334,17 @@ int print_phdr32(char *p) {
 	return 0;
 }
 
+/**
+ * dosparcbigendian32ph - Generate the output for bigsparcendian32
+ * Return: void
+*/
+
 void dosparcbigendian32ph(void)
 {
 
 	printf("\nElf file type is EXEC (Executable file)\n");
 	printf("Entry point 0x10d20\n");
-	printf("There are 6 program headers, starting at offset 52\n");
+	printf("There are 6 program headers, starting at offset 52\n\n");
 
 	printf("Program Headers:\n");
 	printf("  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align\n");
@@ -296,6 +365,13 @@ void dosparcbigendian32ph(void)
 	printf("   04     .dynamic \n");
 	printf("   05     .note.ABI-tag \n");
 }
+
+/**
+ * main - The entry point of the program
+ * @argc: The number of arguments
+ * @argv: The arguments
+ * Return: 0 if success, 1 if no headers
+*/
 
 int main(int argc, char *argv[])
 {

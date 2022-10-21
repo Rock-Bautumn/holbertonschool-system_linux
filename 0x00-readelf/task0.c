@@ -9,6 +9,12 @@
 #include <assert.h>
 #include <stdlib.h>
 
+/**
+ * doBigEndian - Generate the output for big endian
+ * Return: void
+*/
+
+
 void doBigEndian(void)
 {
 

@@ -7,6 +7,12 @@
 #include <string.h>
 #include "shtypes.h"
 
+/**
+ * dosparcbigendian32 - Generate the output for sparcbigendian 32 bits
+ * Return: void
+*/
+
+
 void dosparcbigendian32(void)
 {
 printf("There are 24 section headers, starting at offset 0x14a50:\n");
@@ -43,6 +49,12 @@ printf("  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)
 printf("  O (extra OS processing required) o (OS specific), p (processor specific)\n");
 exit(EXIT_SUCCESS);
 }
+
+/**
+ * sht_str64 - Find the string output for a given section header type
+ * @shtype: the program header type from shdr, 64 bits
+ * Return: The string of the shtype
+*/
 
 char *sht_str64(Elf64_Word shtype)
 {
@@ -87,6 +99,12 @@ char *sht_str64(Elf64_Word shtype)
 	return (NULL);
 }
 
+/**
+ * sht_str32II - Find the string output for a given section header type (more)
+ * @shtype: the program header type from shdr, 32 bits
+ * Return: The string of the shtype
+*/
+
 char *sht_str32II(Elf32_Word shtype)
 {
 	switch (shtype)
@@ -103,6 +121,12 @@ char *sht_str32II(Elf32_Word shtype)
 	}
 	return (NULL);
 }
+
+/**
+ * sht_str32 - Find the string output for a given section header type
+ * @shtype: the program header type from shdr, 32 bits
+ * Return: The string of the shtype
+*/
 
 char *sht_str32(Elf32_Word shtype)
 {
@@ -146,6 +170,12 @@ char *sht_str32(Elf32_Word shtype)
 	return (NULL);
 }
 
+/**
+ * flg_to_str64 - Generate the output string of shflags
+ * @flags: the program header flag from shdr, 64 bits
+ * @retval: the output string address
+ * Return: The string of the shflag
+*/
 
 char *flg_to_str64(char *retval, Elf64_Xword flags)
 {
@@ -189,6 +219,13 @@ char *flg_to_str64(char *retval, Elf64_Xword flags)
 	return retval;
 }
 
+/**
+ * flg_to_str32 - Generate the output string of shflags
+ * @flags: the program header flag from shdr, 32 bits
+ * @retval: the output string address
+ * Return: The string of the shflag
+*/
+
 char *flg_to_str32(char *retval, Elf32_Xword flags)
 {
 	short i = 0;
@@ -226,6 +263,12 @@ char *flg_to_str32(char *retval, Elf32_Xword flags)
 
 	return retval;
 }
+
+/**
+ * print_keyflag_legend64 - Generate the output strings of legend
+ * Return: void
+*/
+
 void print_keyflag_legend64(void)
 {
 	printf("Key to Flags:\n  W (write), A (alloc), X (execute), ");
@@ -235,6 +278,11 @@ void print_keyflag_legend64(void)
 	printf("p (processor specific)\n");
 }
 
+/**
+ * print_keyflag_legend32 - Generate the output strings of legend
+ * Return: void
+*/
+
 void print_keyflag_legend32(void)
 {
 	printf("Key to Flags:\n  W (write), A (alloc), X (execute), ");
@@ -243,6 +291,12 @@ void print_keyflag_legend32(void)
 	printf("  O (extra OS processing required) o (OS specific), ");
 	printf("p (processor specific)\n");
 }
+
+/**
+ * print_shdr64 - Generate the output of the section headers
+ * @p: The first byte of the elf file
+ * Return: always 0
+*/
 
 int print_shdr64(char *p) {
 	Elf64_Ehdr *ehdr = (Elf64_Ehdr*)p;
@@ -279,6 +333,12 @@ int print_shdr64(char *p) {
 	return 0;
 }
 
+/**
+ * print_shdr32 - Generate the output of the section headers
+ * @p: The first byte of the elf file
+ * Return: always 0
+*/
+
 int print_shdr32(char *p) {
 	Elf32_Ehdr *ehdr = (Elf32_Ehdr*)p;
 	Elf32_Shdr *shdr = (Elf32_Shdr *)(p + ehdr->e_shoff);
@@ -313,6 +373,13 @@ int print_shdr32(char *p) {
 	print_keyflag_legend32();
 	return 0;
 }
+
+/**
+ * main - The entry point of the program
+ * @argc: The number of arguments
+ * @argv: The arguments
+ * Return: 0 if success, 1 if stat error
+*/
 
 int main(int argc, char *argv[])
 {
