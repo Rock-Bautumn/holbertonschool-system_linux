@@ -9,3 +9,4 @@ TEST*
 #output files
 a.out
 *.o
+*-readelf
