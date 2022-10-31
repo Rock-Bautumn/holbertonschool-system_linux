@@ -1,0 +1,15 @@
+# meta
+#.gitignore
+
+# test files
+
+test*
+
+# object files
+a.out
+*.o
+0-strlen
+1-strcmp
+2-strncmp
+
+
