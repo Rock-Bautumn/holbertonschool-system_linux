@@ -60,8 +60,8 @@ return_matched:
     jmp quit
 
 return_greater:
-    xor rax, rax
-    inc rax
+    sub al, dl
+    movzx rax, al
     jmp quit
 
 return_less:
