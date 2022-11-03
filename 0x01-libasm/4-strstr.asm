@@ -27,6 +27,8 @@ find_match:
     mov r8, rsi
     mov r9, rdi
 match_string:
+    cmp [r8 + 1], BYTE 0
+    jz match_found
     cmp [r8], BYTE 0
     jz match_found
     inc r8
