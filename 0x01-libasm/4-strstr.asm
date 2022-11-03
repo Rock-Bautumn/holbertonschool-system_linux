@@ -17,6 +17,8 @@ search_start:
     cmp rax, BYTE 0
     jz no_match
     movzx rdx, BYTE [rsi]
+    cmp rdx, 0
+    jz found_start
     cmp rax, rdx
     je find_match
 
@@ -37,10 +39,20 @@ match_string:
     movzx rcx, BYTE [r9]
     cmp r10, rcx
     je match_string
-    jmp no_match
+    jmp dead_no_match
 
 no_match:
+    movzx rdx, BYTE [rsi]
+    cmp rdx, 0
+    jz found_start
+dead_no_match:
     xor rax, rax
+    jmp cleanup
+
+found_start:
+    cmp rax, 0
+    jz match_found
+    mov rax, rdi
     jmp cleanup
 
 match_found:
