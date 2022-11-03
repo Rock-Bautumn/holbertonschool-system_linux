@@ -15,14 +15,16 @@ asm_strcasecmp:
 compare:
     mov bl, [rdi + rcx]
     mov dl, [rsi + rcx]
-    cmp bl, byte 0
-    jz first_ends
-    cmp dl, byte 0
-    jz second_ends
+
 save_difference:
     mov al, bl
     sub al, dl
     movsx rax, al
+
+    cmp bl, byte 0
+    jz first_ends
+    cmp dl, byte 0
+    jz second_ends
     cmp bl, dl
     jl less
     jg greater
