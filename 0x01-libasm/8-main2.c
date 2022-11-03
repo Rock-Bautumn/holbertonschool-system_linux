@@ -7,8 +7,8 @@
 
 #include "libasm.h"
 
-#define S1	"Holberton School"
-#define S2	"Holberton"
+#define S2	"Holberton School"
+#define S1	"Holberton"
 
 /**
  * main - Program entry point

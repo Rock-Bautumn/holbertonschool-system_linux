@@ -5,19 +5,25 @@ global asm_strcasecmp
 ; rsi = string2
 
 asm_strcasecmp:
+    push rbx
     push rcx
     push rdx
     xor rcx, rcx
     xor rax, rax
     xor rdx, rdx
+    xor rbx, rbx
 compare:
-    mov al, [rdi + rcx]
+    mov bl, [rdi + rcx]
     mov dl, [rsi + rcx]
-    cmp al, byte 0
+    cmp bl, byte 0
     jz first_ends
     cmp dl, byte 0
     jz second_ends
-    cmp al, dl
+save_difference:
+    mov al, bl
+    sub al, dl
+    movsx rax, al
+    cmp bl, dl
     jl less
     jg greater
 goto_next:
@@ -25,11 +31,11 @@ goto_next:
     jmp compare
 
 greater:
-    cmp al, 'a'
+    cmp bl, 'a'
     jl return_greater
-    cmp al, 'z'
+    cmp bl, 'z'
     jg return_greater
-    sub al, 32
+    sub bl, 32
     jmp second_try
 
 less:
@@ -41,11 +47,10 @@ less:
     jmp second_try
 
 second_try:
-    cmp al, dl
+    cmp bl, dl
     jl return_greater
     jg return_less
     jmp goto_next
-
 
 first_ends:
     cmp dl, byte 0
@@ -60,16 +65,18 @@ return_matched:
     jmp quit
 
 return_greater:
-    sub al, dl
-    movzx rax, al
+    ; sub bl, dl
+    ; movzx rax, bl
     jmp quit
 
 return_less:
-    xor rax, rax
-    dec rax
+    ; sub dl, bl
+    ; neg dl
+    ; movsx rax, dl
     jmp quit
 
 quit:
     pop rdx
     pop rcx
+    pop rbx
     ret

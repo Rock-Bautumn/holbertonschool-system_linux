@@ -8,7 +8,7 @@
 #define S1  "Holberton School"
 #define S2  "HOLBERTON SCHOOL"
 #define S3  "Holberton SchooL"
-#define S4  "holberton socool"
+#define S4  "HoLberton socool"
 #define S5  "hello"
 #define S6  "Holberton"
 
@@ -19,8 +19,8 @@
  */
 int main(void)
 {
-    printf("|%d|\n", strcasecmp(S1, S6));
-    printf(">%d<\n", asm_strcasecmp(S1, S6));
+    printf("|%d|\n", strcasecmp(S1, S4));
+    printf(">%d<\n", asm_strcasecmp(S1, S4));
     fflush(NULL);
     if (strcasecmp(S1, S5) == asm_strcasecmp(S1, S5))
         printf("They matched!\n");
