@@ -5,6 +5,7 @@ global	asm_strlen
 
 asm_strlen:
   push  rcx            ; save and clear out counter
+  push  rdi
   xor   rcx, rcx
 
 _strlen_next:
@@ -16,5 +17,6 @@ _strlen_next:
 
 _strlen_null:
   mov   rax, rcx       ; rcx = the length (put in rax)
+  pop   rdi
   pop   rcx            ; restore rcx
   ret                  ; get out
