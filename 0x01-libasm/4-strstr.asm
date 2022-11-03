@@ -21,7 +21,7 @@ search_start:
     jz found_start
     cmp rax, rdx
     je find_match
-
+try_again:
     inc rdi
     jmp search_start
 
@@ -39,7 +39,7 @@ match_string:
     movzx rcx, BYTE [r9]
     cmp r10, rcx
     je match_string
-    jmp dead_no_match
+    jmp try_again
 
 no_match:
     movzx rdx, BYTE [rsi]
