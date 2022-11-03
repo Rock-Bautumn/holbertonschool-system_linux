@@ -11,5 +11,5 @@ a.out
 0-strlen
 1-strcmp
 2-strncmp
-
+3-strchr
 
