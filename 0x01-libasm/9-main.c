@@ -9,6 +9,7 @@
 #define S2  "HOLBERTON SCHOOL"
 #define S3  "Holberton SchooL"
 #define S4  "holberton socool"
+#define S5  "Holberton"
 
 /**
  * main - Program entry point
@@ -29,6 +30,9 @@ int main(void)
     assert(strncasecmp(S1, S3, 16) == asm_strncasecmp(S1, S3, 16));
     assert(strncasecmp(S1, S4, 11) == asm_strncasecmp(S1, S4, 11));
     assert(strncasecmp(S1, S4, 16) == asm_strncasecmp(S1, S4, 16));
+    assert(strncasecmp(S1, S5, 16) == asm_strncasecmp(S1, S5, 9));
+    assert(strncasecmp(S1, S4, 16) == asm_strncasecmp(S1, S4, 9));
+
 
     printf("All good!\n");
     return (EXIT_SUCCESS);

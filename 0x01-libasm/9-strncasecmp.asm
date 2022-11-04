@@ -32,6 +32,8 @@ save_difference:
     cmp bl, dl
     jl less
     jg greater
+    cmp r9, 0
+    jz return_matched
 
 goto_next:
     inc rcx
