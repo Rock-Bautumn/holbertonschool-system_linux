@@ -21,10 +21,10 @@
  */
 int main(void)
 {
-    printf("|%d|\n", strcasecmp(S1, S6));
-    printf(">%d<\n", asm_strcasecmp(S1, S6));
+    printf("|%d|\n", strcasecmp(S6, S8));
+    printf(">%d<\n", asm_strcasecmp(S6, S8));
     fflush(NULL);
-    if (strcasecmp(S1, S6) == asm_strcasecmp(S1, S6))
+    if (strcasecmp(S6, S8) == asm_strcasecmp(S6, S8))
         printf("They matched!\n");
     assert(strcasecmp(S1, S1) == asm_strcasecmp(S1, S1));
     assert(strcasecmp(S1, S2) == asm_strcasecmp(S1, S2));
