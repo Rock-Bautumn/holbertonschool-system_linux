@@ -13,3 +13,11 @@ a.out
 2-strncmp
 3-strchr
 4-strstr
+5-memcpy
+6-putc
+7-puts
+8-strcasecmp
+9-strncasecmp
+10-strspn
+11-strcspn
+12-strpbrk
