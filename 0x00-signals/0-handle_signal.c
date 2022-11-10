@@ -9,6 +9,7 @@
 void handle_sigint(int sig)
 {
 	printf("Gotcha! [%d]\n", sig);
+	fflush(stdout);
 }
 
 /**

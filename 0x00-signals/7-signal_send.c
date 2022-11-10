@@ -8,7 +8,7 @@
 */
 int main(int ac, char **av)
 {
-	int pid;
+	int pid, retval;
 
 	if (ac < 2)
 	{
@@ -16,5 +16,8 @@ int main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 	pid = atoi(av[1]);
-	return (kill(pid, SIGINT));
+	retval = kill(pid, SIGINT);
+	if (retval == 255)
+		retval = EXIT_FAILURE;
+	return (retval);
 }
