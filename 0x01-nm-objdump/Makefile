@@ -3,8 +3,8 @@
 all: 0-nm
 
 
-0-nm: task1.c task_1a.c task_1b.c
-	gcc task1.c task_1a.c task_1b.c -Wall -pedantic -Wextra -Werror -std=c90 -g -o 0-nm
+0-nm: task0.c task_0a.c task_0b.c
+	gcc task0.c task_0a.c task_0b.c -Wall -pedantic -Wextra -Werror -std=c90 -g -o 0-nm
 
 
 clean:

@@ -1,11 +1,4 @@
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <elf.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <string.h>
-#include "task1.h"
+#include "task0.h"
 
 
 /**
@@ -49,6 +42,7 @@ int print_shdr32(char *p)
 		if (strcmp(sh_strtab_p + shdr[i].sh_name, ".symtab") == 0)
 		{
 			printf("found symtab\n");
+
 		}
 	}
 	print_keyflag_legend32();
@@ -82,9 +76,11 @@ int main(int argc, char *argv[])
 	fd = open(fname, O_RDONLY);
 	p = mmap(0, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
 	elf = (void *) p;
-	if (*elf == 1179403647)
-		printf("it's an elf file!\n");
-	
+	if (*elf != 1179403647)
+	{
+		fprintf(stderr, "Not an ELF file.");
+		return (EXIT_FAILURE);
+	}
 	if ((unsigned char)p[EI_CLASS] == ELFCLASS64)
 		print_shdr64(p);
 	else if (strncmp(argv[1], "sparcbigendian32", 16) == 0)
@@ -93,7 +89,6 @@ int main(int argc, char *argv[])
 		print_shdr32(p);
 	else
 		printf("Class:%*s", 35, "Invalid class\n");
-
 
 	return (EXIT_SUCCESS);
 }
