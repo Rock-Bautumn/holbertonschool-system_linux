@@ -175,20 +175,17 @@ char print_type(Elf64_Sym sym, Elf64_Shdr *shdr)
 }
 
 
-
 /**
  * print_shdr64 - Generate the output of the section headers
  * @p: The first byte of the elf file
  * Return: always 0
 */
-
 int print_shdr64(char *p)
 {
 	Elf64_Ehdr *ehdr = (Elf64_Ehdr *)p;
 	Elf64_Shdr *shdr = (Elf64_Shdr *)(p + ehdr->e_shoff);
 	int shnum = ehdr->e_shnum, i = 0;
-	char *strtab_p;
-	char exit_flag = 0, print = 0, symtype;
+	char *strtab_p, exit_flag = 0, print = 0, symtype;
 	Elf64_Word shtype;
 	Elf64_Sym *symtab;
 	
@@ -211,7 +208,10 @@ int print_shdr64(char *p)
 			symtype = print_type(symtab[i], shdr);
 			if (symtab[i].st_name != 0 && symtype != 'a')
 			{
-				printf("%016lx ", symtab[i].st_value);
+				if (symtype != 'U' && symtype != 'w')
+					printf("%016lx ", symtab[i].st_value);
+				else
+					printf("%-17c ", '\0');
 				printf("%c", symtype);
 				printf(" %s\n", symtab[i].st_name + strtab_p);
 			}
