@@ -164,6 +164,9 @@ char print_type(Elf64_Sym sym, Elf64_Shdr *shdr)
 	c = 'D';
 	else if (shdr[sym.st_shndx].sh_type == SHT_INIT_ARRAY)
 	c = 'D';
+	else if (shdr[sym.st_shndx].sh_type == 7)
+	c = 'r';
+	
 	else
 	{
 		printf("\nshdr[sym.st_shndx].sh_type = %d\n", shdr[sym.st_shndx].sh_type);
@@ -208,8 +211,15 @@ int print_shdr64(char *p)
 			symtype = print_type(symtab[i], shdr);
 			if (symtab[i].st_name != 0 && symtype != 'a')
 			{
-				if (symtype != 'U' && symtype != 'w')
+				if (symtype != 'U' && symtype != 'w')				
+				{
 					printf("%016lx ", symtab[i].st_value);
+					printf("      %d    ", symtab[i].st_name);
+					printf("      %d    ", symtab[i].st_info);
+					printf("      %d    ", symtab[i].st_other);
+					printf("      %d    ", symtab[i].st_shndx);
+					printf("      %lx    ", symtab[i].st_size);
+				}
 				else
 					printf("%-17c ", '\0');
 				printf("%c", symtype);
