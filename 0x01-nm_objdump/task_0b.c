@@ -164,7 +164,7 @@ char print_type(Elf64_Sym sym, Elf64_Shdr *shdr)
 	c = 'D';
 	else if (shdr[sym.st_shndx].sh_type == SHT_INIT_ARRAY)
 	c = 'D';
-	else if (shdr[sym.st_shndx].sh_type == 7)
+	else if (shdr[sym.st_shndx].sh_type == SHT_NOTE)
 	c = 'r';
 	
 	else
