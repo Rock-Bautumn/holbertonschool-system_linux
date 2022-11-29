@@ -211,15 +211,8 @@ int print_shdr64(char *p)
 			symtype = print_type(symtab[i], shdr);
 			if (symtab[i].st_name != 0 && symtype != 'a')
 			{
-				if (symtype != 'U' && symtype != 'w')				
-				{
+				if (symtype != 'U' && symtype != 'w')
 					printf("%016lx ", symtab[i].st_value);
-					printf("      %d    ", symtab[i].st_name);
-					printf("      %d    ", symtab[i].st_info);
-					printf("      %d    ", symtab[i].st_other);
-					printf("      %d    ", symtab[i].st_shndx);
-					printf("      %lx    ", symtab[i].st_size);
-				}
 				else
 					printf("%-17c ", '\0');
 				printf("%c", symtype);
