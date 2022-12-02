@@ -1,5 +1,5 @@
-#ifndef TASK_1
-#define TASK_1
+#ifndef TASK_0
+#define TASK_0
 
 #include <string.h>
 #include <sys/mman.h>
@@ -11,6 +11,7 @@
 #include <fcntl.h>
 #include <assert.h>
 #include <stdlib.h>
+
 #include "shtypes.h"
 
 char *sht_str32(Elf32_Word shtype);
@@ -25,4 +26,4 @@ void print_keyflag_legend64(void);
 void print_keyflag_legend32(void);
 int print_shdr64(char *p);
 
-#endif /* TASK_1 */
+#endif /* TASK_0 */
