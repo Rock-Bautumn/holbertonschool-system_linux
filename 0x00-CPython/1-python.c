@@ -7,10 +7,10 @@ void print_python_list(PyObject *p)
 	int i;
 
 	if (PyList_Check(p) == 0)
-		{
-			fprintf(stderr, "The object is not a list\n");
-			return;
-		}
+	{
+		fprintf(stderr, "The object is not a list\n");
+		return;
+	}
 	printf("[*] Python list info\n");
 	printf("[*] Size of the Python List = %ld\n", Py_SIZE(p));
 	printf("[*] Allocated = %ld\n", list->allocated);
