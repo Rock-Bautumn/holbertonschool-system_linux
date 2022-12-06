@@ -71,7 +71,7 @@ void print_python_list(PyObject *p)
 	{
 		listItem = PyList_GET_ITEM(p, i);
 		printf("Element %d: %s\n", i, listItem->ob_type->tp_name);
-		if (strcmp(listItem->ob_type->tp_name, "byte") == 0)
+		if (strcmp(listItem->ob_type->tp_name, "bytes") == 0)
 			print_python_bytes(p);
 	}
 }
