@@ -55,13 +55,15 @@ void print_python_bytes(PyObject *p)
 	Py_ssize_t size;
 	unsigned int i;
 
+	setbuf(stdout, NULL);
 	printf("[.] bytes object info\n");
+
 	if (PyBytes_Check(p) == 0)
 	{
 		printf("  [ERROR] Invalid Bytes Object\n");
-		fflush(stdout);
 		return;
 	}
+
 	bytes = (PyBytesObject *) p;
 	size = bytes->ob_base.ob_size;
 	printf("  size: %lu\n", size);
@@ -82,10 +84,11 @@ void print_python_list(PyObject *p)
 	PyListObject *list = (PyListObject *) p;
 	int i;
 
+	setbuf(stdout, NULL);
+
 	if (PyList_Check(p) == 0)
 	{
 		printf("  [ERROR] Invalid List Object\n");
-		fflush(stdout);
 		return;
 	}
 	printf("[*] Python list info\n");
@@ -98,5 +101,7 @@ void print_python_list(PyObject *p)
 		printf("Element %d: %s\n", i, listItem->ob_type->tp_name);
 		if (strcmp(listItem->ob_type->tp_name, "bytes") == 0)
 			print_python_bytes((PyObject *) listItem);
+		else if (strcmp(listItem->ob_type->tp_name, "float") == 0)
+			print_python_float((PyObject *) listItem);
 	}
 }
