@@ -30,6 +30,7 @@ void print_python_bytes(PyObject *p)
 	Py_ssize_t size;
 	unsigned int i;
 
+	printf("[.] bytes object info\n");
 	if (PyBytes_Check(p) == 0)
 	{
 		printf("  [ERROR] Invalid Bytes Object\n");
@@ -38,7 +39,6 @@ void print_python_bytes(PyObject *p)
 	}
 	bytes = (PyBytesObject *) p;
 	size = bytes->ob_base.ob_size;
-	printf("[.] bytes object info\n");
 	printf("  size: %lu\n", size);
 	printf("  trying string: %s\n", bytes->ob_sval);
 	if (size >= MAX_PRINT_SIZE)
