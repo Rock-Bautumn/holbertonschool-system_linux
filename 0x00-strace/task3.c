@@ -46,6 +46,11 @@ void print_params(struct user_regs_struct *user_regs)
 			printf("%s%lx",  user_regs->rsi == 0 ? "" : "0x", (size_t) user_regs->rsi);
 			break;
 		case 2:
+			if (syscalls_64_g[user_regs->orig_rax].params[2] == VARARGS)
+			{
+				printf("...");
+				break;
+			}
 			printf("%s%lx",  user_regs->rdx == 0 ? "" : "0x", (size_t) user_regs->rdx);
 			break;
 		case 3:
