@@ -43,7 +43,7 @@ int main(int argc, char **argv, char **environ)
 		fatal_error("Fork failed");
 	else if (pid > 0)
 	{
-		puts("execve");
+		printf("execve");
 		while (!WIFEXITED(child_status))
 		{
 			alternator++;
