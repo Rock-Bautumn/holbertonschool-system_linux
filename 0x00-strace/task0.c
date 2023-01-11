@@ -7,17 +7,17 @@
 #include <sys/wait.h>
 #include <sys/user.h>
 #include <unistd.h>
-
 #include "syscalls.h"
 
-/** fatal_error - ends the process while printing an error
+/**
+ * fatal_error - ends the process while printing an error
  * @error_text: the message to print when exiting
  * Return: void
 */
 
 void fatal_error(char *error_text)
 {
-	perror(error_text);
+	fprintf(stderr, "ERROR: %s\n", error_text);
 	exit(EXIT_FAILURE);
 }
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv, char **environ)
 {
 	pid_t pid;
 	struct user_regs_struct user_regs;
-	int child_status = EXIT_FAILURE, exit_status = EXIT_SUCCESS;
+	int child_status = EXIT_FAILURE;
 	size_t alternator = 0;
 
 	if (argc < 2)
@@ -51,8 +51,9 @@ int main(int argc, char **argv, char **environ)
 			wait(&child_status);
 if (ptrace(PTRACE_GETREGS, pid, 0, &user_regs) == 0 && alternator % 2 == 0)
 				printf("%lu\n", (size_t) user_regs.orig_rax);
-		fflush(stdout);
+			fflush(stdout);
 		}
+		ptrace(PTRACE_DETACH, pid, NULL, NULL);
 	}
 	else if (pid == 0)
 	{
@@ -60,5 +61,5 @@ if (ptrace(PTRACE_GETREGS, pid, 0, &user_regs) == 0 && alternator % 2 == 0)
 		execve(argv[1], &argv[1], environ);
 	}
 
-	return (exit_status);
+	return (EXIT_SUCCESS);
 }
