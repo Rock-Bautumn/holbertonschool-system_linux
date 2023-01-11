@@ -33,6 +33,8 @@ void print_params(struct user_regs_struct *user_regs)
 	size_t param_qty = syscalls_64_g[user_regs->orig_rax].nb_params;
 	size_t this_param = 0;
 
+	if (syscalls_64_g[user_regs->orig_rax].params[0] == VOID)
+		return;
 	while (this_param < param_qty)
 	{
 		switch (this_param)
