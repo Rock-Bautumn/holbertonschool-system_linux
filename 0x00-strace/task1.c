@@ -50,7 +50,13 @@ int main(int argc, char **argv, char **environ)
 			ptrace(PTRACE_SYSCALL, pid, 0, 0);
 			wait(&child_status);
 if (ptrace(PTRACE_GETREGS, pid, 0, &user_regs) == 0 && alternator % 2 == 0)
-				printf("%s\n", syscalls_64_g[user_regs.orig_rax].name);
+			{
+				printf("%s", syscalls_64_g[user_regs.orig_rax].name);
+				if (user_regs.orig_rax != 1)
+					printf("\n");
+			}
+			if (user_regs.orig_rax == 1 && alternator % 2 == 1)
+				printf("\n");
 			fflush(stdout);
 		}
 		ptrace(PTRACE_DETACH, pid, NULL, NULL);
