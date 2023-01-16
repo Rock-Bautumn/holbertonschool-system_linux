@@ -2,7 +2,7 @@
 
 /**
  * thread_entry - entry point for the thread, prints the string passed to it
- * arg - The data string
+ * @arg - The data string
  * Return - NULL
 */
 void *thread_entry(void *arg)
