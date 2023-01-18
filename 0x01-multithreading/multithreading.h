@@ -1,13 +1,11 @@
+#ifndef MUTHREADING_H
+#define MUTHREADING_H
+
 #include <pthread.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
-
-#ifndef MUTHREADING_H
-#define MUTHREADING_H
-
-void *thread_entry(void *arg);
-int tprintf(char const *format, ...);
+#include <stdlib.h>
 
 
 /**
@@ -71,5 +69,15 @@ typedef struct blur_portion_s
     size_t h;
     kernel_t const *kernel;
 } blur_portion_t;
+
+pthread_mutex_t the_mutex;
+
+
+void *thread_entry(void *arg);
+int tprintf(char const *format, ...);
+
+void beginMutex (void) __attribute__((constructor));
+void endMutex (void) __attribute__((destructor));
+
 
 #endif /* MUTHREADING_H */
