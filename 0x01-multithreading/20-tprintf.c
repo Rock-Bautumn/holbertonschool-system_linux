@@ -4,7 +4,7 @@
  * beginMutex - Initializes the global mutex item
 */
 
-void beginMutex (void)
+void beginMutex(void)
 {
 	pthread_mutex_init(&the_mutex, NULL);
 }
@@ -13,7 +13,7 @@ void beginMutex (void)
  * endMutex - Destroys the global mutex item
 */
 
-void endMutex (void)
+void endMutex(void)
 {
 	pthread_mutex_destroy(&the_mutex);
 }
