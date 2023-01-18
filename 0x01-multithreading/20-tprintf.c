@@ -26,9 +26,16 @@ void endMutex (void)
 
 int tprintf(char const *format, ...)
 {
+	va_list va_items;
+
 	pthread_mutex_lock(&the_mutex);
 	if (format)
-		printf("[%lu] %s", pthread_self(), format);
+	{
+		va_start(va_items, format);
+		printf("[%lu] ", pthread_self());
+		vprintf(format, va_items);
+		va_end(va_items);
+	}
 	pthread_mutex_unlock(&the_mutex);
 	return (EXIT_SUCCESS);
 }

@@ -2,6 +2,7 @@
 #define MUTHREADING_H
 
 #include <pthread.h>
+#include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
