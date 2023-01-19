@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "list.h"
 
 /**
  * struct pixel_s - RGB pixel
@@ -73,12 +73,11 @@ typedef struct blur_portion_s
 
 pthread_mutex_t the_mutex;
 
-
 void *thread_entry(void *arg);
 int tprintf(char const *format, ...);
 
-void beginMutex (void) __attribute__((constructor));
-void endMutex (void) __attribute__((destructor));
-
+void beginMutex(void) __attribute__((constructor));
+void endMutex(void) __attribute__((destructor));
+list_t *prime_factors(char const *s);
 
 #endif /* MUTHREADING_H */
