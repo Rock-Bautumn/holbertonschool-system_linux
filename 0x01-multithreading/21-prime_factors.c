@@ -25,7 +25,7 @@ list_t *prime_factors(char const *s)
 
 	head = list_init(head);
 
-	for (i = 2; i <= num; i += (i == 2) ? 1 : 2)
+	for (i = 2; (i * i) <= num; i += (i == 2) ? 1 : 2)
 	{
 		while (num % i == 0)
 		{
@@ -34,6 +34,13 @@ list_t *prime_factors(char const *s)
 			list_add(head, factor);
 			num /= i;
 		}
+	}
+
+	if (num != 1)
+	{
+		factor = malloc(sizeof(size_t));
+		*factor = num;
+		list_add(head, factor);
 	}
 	return (head);
 }
