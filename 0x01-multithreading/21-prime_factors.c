@@ -11,19 +11,21 @@
 
 list_t *prime_factors(char const *s)
 {
-	size_t i, num = strtoul(s, NULL, 10);
+	size_t i, num;
 	list_t *head;
 	size_t *factor;
 
 	if (!s)
 		return (NULL);
+	num = strtoul(s, NULL, 10);
 
-	head = malloc(sizeof(list_t *));
+	head = malloc(sizeof(list_t));
 	if (!head)
 		return (NULL);
 
 	head = list_init(head);
-	for (i = 2; i <= num; i++)
+
+	for (i = 2; i <= num; i += (i == 2) ? 1 : 2)
 	{
 		while (num % i == 0)
 		{
