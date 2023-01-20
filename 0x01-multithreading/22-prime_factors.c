@@ -5,7 +5,7 @@
  * create_task - Generates a task item to be executed later
  * @entry: The function that the task performs
  * @param: The parameters passed to the entry function
- * Return: 
+ * Return: The created task item
  */
 
 task_t *create_task(task_entry_t entry, void *param)
@@ -77,7 +77,8 @@ void *exec_tasks(list_t const *tasks)
 			else
 				this_task->status = SUCCESS;
 
-			tprintf("[%02d] %s\n", id, (this_task->status == SUCCESS) ? "Success" : "Failure");
+			tprintf(
+"[%02d] %s\n", id, (this_task->status == SUCCESS) ? "Success" : "Failure");
 		}
 		id++;
 		this_node = this_node->next;
