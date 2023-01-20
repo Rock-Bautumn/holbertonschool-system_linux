@@ -77,7 +77,7 @@ void *exec_tasks(list_t const *tasks)
 			else
 				this_task->status = SUCCESS;
 
-			tprintf("[%02d] %s\n", id), (this_task->result == SUCCESS) ? "Success" : "Failure";
+			tprintf("[%02d] %s\n", id, (this_task->status == SUCCESS) ? "Success" : "Failure");
 		}
 		id++;
 		this_node = this_node->next;
