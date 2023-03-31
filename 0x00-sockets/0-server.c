@@ -13,7 +13,7 @@
 #include <signal.h>
 
 /* port 0 means any port the OS chooses */
-#define PORT 0
+#define PORT 12345
 
 /* INADDR_ANY means use any network interface the OS chooses, this is (usually) 0 */
 #define IN_ADDR INADDR_ANY
@@ -59,7 +59,7 @@ int main(void)
 		return (EXIT_FAILURE);
 	}
 
-	printf("Listening on port %d...\n", sock_addr.sin_port);
+	printf("Listening on port %d...\n", ntohs(sock_addr.sin_port));
 
 	while (true)
 		;
