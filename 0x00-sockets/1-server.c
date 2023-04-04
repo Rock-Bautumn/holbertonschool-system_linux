@@ -11,6 +11,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <signal.h>
+#include <arpa/inet.h>
 
 /* port 0 means any port the OS chooses */
 #define PORT 12345
@@ -24,6 +25,12 @@
 /* set the maximum number of connections that can wait to be connected */
 #define MAX_BACKLOG 32
 
+void ErrorAndDie(char *string)
+{
+	perror(string);
+	exit(EXIT_FAILURE);
+}
+
 
 /**
  * main - Entry point the server program
@@ -31,41 +38,35 @@
 */
 int main(void)
 {
-	int sock_fd;
-	struct sockaddr_in sock_addr;
-
-	/* create the socket and save its file descriptor to use later */
+	struct sockaddr_in sock_addr, new_sock_addr;
+	int sock_fd, new_sock_fd, addrlen = sizeof(sock_addr);
 
 	sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sock_fd < 0)
-	{
-		perror("Cannot create socket");
-		return (EXIT_FAILURE);
-	}
-	/* zero out the address struct before we use it */
+		ErrorAndDie("Cannot create socket");
 	memset((char *) &sock_addr, 0, sizeof(sock_addr));
-	/* set up the address struct */
-	/* set the family/domain to AF_INET since we are using IPv4 networking */
 	sock_addr.sin_family = AF_INET;
-	/* set the network interface to listen on */
 	sock_addr.sin_addr.s_addr = htonl(IN_ADDR);
-	/* set the port to listen on */
 	sock_addr.sin_port = htons(PORT);
-	/* bind the socket to the port and interface */
 	if (bind(sock_fd, (struct sockaddr *) &sock_addr, sizeof(sock_addr))
 	< 0)
-	{
-		perror("failed to bind to socket");
-		return (EXIT_FAILURE);
-	}
-	/* start listening to the socket */
+		ErrorAndDie("Failed to bind to socket");
 	if (listen(sock_fd, MAX_BACKLOG) < 0)
-	{
-		perror("failed to listen to the socket");
-		return (EXIT_FAILURE);
-	}
-	printf("Listening on port %d...\n", ntohs(sock_addr.sin_port));
+		ErrorAndDie("Failed to listen to the socket");
+	printf("Server listening on port %d\n", ntohs(sock_addr.sin_port));
 	while (true)
-		;
+	{
+		new_sock_fd = accept(sock_fd, (struct sockaddr *) &sock_addr,
+			(socklen_t *) &addrlen);
+		if (new_sock_fd < 0)
+			ErrorAndDie("Unable to accept the connection");
+		if (getpeername(new_sock_fd,
+			(struct sockaddr *) &new_sock_addr,
+			(socklen_t *) &addrlen) < 0)
+			ErrorAndDie("Unable to get peer name");
+		printf("Client connected: %s\n", inet_ntoa(new_sock_addr.sin_addr));
+		close(new_sock_fd);
+		break;
+	}
 	return (EXIT_SUCCESS);
 }
