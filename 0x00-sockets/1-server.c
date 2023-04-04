@@ -25,12 +25,16 @@
 /* set the maximum number of connections that can wait to be connected */
 #define MAX_BACKLOG 32
 
+/**
+ * ErrorAndDie - Print an error message with perror and exit with failure
+ * @string: The error message to print with perror
+ * Return: void
+*/
 void ErrorAndDie(char *string)
 {
 	perror(string);
 	exit(EXIT_FAILURE);
 }
-
 
 /**
  * main - Entry point the server program
@@ -41,7 +45,7 @@ int main(void)
 	struct sockaddr_in sock_addr, new_sock_addr;
 	int sock_fd, new_sock_fd, addrlen = sizeof(sock_addr);
 
-	sock_fd = socket(AF_INET, SOCK_STREAM, 0);
+	sock_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (sock_fd < 0)
 		ErrorAndDie("Cannot create socket");
 	memset((char *) &sock_addr, 0, sizeof(sock_addr));
