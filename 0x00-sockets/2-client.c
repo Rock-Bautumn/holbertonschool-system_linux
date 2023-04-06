@@ -36,6 +36,7 @@ int main(int argc, char const *argv[])
 	struct addrinfo *host_addr_info, hints;
 	char ip_addr_buf[INET_ADDRSTRLEN];
 
+	(void) argc;
 	if (!argv[2])
 	{
 		printf("Usage: %s <host> <port>\n", argv[0]);
