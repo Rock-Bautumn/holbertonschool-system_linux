@@ -28,6 +28,7 @@ void ErrorAndDie(char *string)
  * particular port number and exits
  * @argc: The number of arguments provided
  * @argv: The arguments provided to the program
+ * Return: EXIT_FAILURE if something goes wrong, otherwise EXIT_SUCCESS
 */
 int main(int argc, char const *argv[])
 {
