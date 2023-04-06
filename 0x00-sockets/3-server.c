@@ -71,7 +71,7 @@ int main(void)
 			(socklen_t *) &addrlen) < 0)
 			ErrorAndDie("Unable to get peer name");
 		printf("Client connected: %s\n", inet_ntoa(new_sock_addr.sin_addr));
-		valread = read(new_sock_fd , buffer, 30000);
+		valread = read(new_sock_fd, buffer, 30000);
 		if (valread == -1)
 			ErrorAndDie("Unable to read socket data from client");
 		printf("Message received: \"%s\"\n", buffer);
