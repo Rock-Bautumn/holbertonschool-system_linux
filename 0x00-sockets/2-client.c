@@ -4,7 +4,7 @@
 #include <sys/socket.h>
 #ifndef __USE_XOPEN2K
 #define __USE_XOPEN2K
-#endif
+#endif /* __USE_XOPEN2K */
 #include <netdb.h>
 #include <stdlib.h>
 #include <unistd.h>
