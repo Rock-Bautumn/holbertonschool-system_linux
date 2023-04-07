@@ -117,6 +117,7 @@ int main(void)
 			ErrorAndDie("Unable to read socket data from client");
 		printOutput(buffer);
 		replyToClient(new_sock_fd);
+		fflush(stdout);
 		close(new_sock_fd);
 	}
 	close(sock_fd);
