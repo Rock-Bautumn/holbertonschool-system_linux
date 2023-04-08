@@ -94,7 +94,6 @@ int main(void)
 	char buffer[30000] = {0};
 	ssize_t valread = 0;
 
-	printf("some output :|");
 	sock_fd = create_socket(&sock_addr);
 	if (bind(sock_fd, (struct sockaddr *) &sock_addr, sizeof(sock_addr))
 	< 0)
