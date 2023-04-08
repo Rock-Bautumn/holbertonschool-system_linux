@@ -62,9 +62,8 @@ void printOutput(char *buffer)
 	printf("Method: %s\n", http_info[0]);
 	printf("Path:");
 	for (item = 1; http_info[item + 1]; item++)
-	{
 		printf(" %s", http_info[item]);
-	}
+
 	printf("\nVersion: %s\n", http_info[space_count(line[0], " ") - 1]);
 	free(line);
 	free(http_info);
@@ -81,7 +80,6 @@ void replyToClient(int sock_fd)
 {
 	send(sock_fd, HTTP_OK, strlen(HTTP_OK), MSG_NOSIGNAL);
 }
-
 
 /**
  * main - Entry point the server program
