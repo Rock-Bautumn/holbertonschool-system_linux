@@ -17,7 +17,21 @@
 #include <arpa/inet.h>
 
 
+typedef struct Node
+{
+	char *key;
+	char *value;
+	struct Node *next;
+} ll_node;
+
+void appendNode(ll_node **head, char *key, char *value);
+void ErrorAndDie(char *string);
+char *extractPathAsCopy(char *http_info);
+char *extractQueryAsCopy(char *http_info);
+
+size_t char_occurrences(char *string, char chr);
 char **ndsplitter(char *fun, char *delimiter);
+ll_node *parseQueryString(ll_node **head, char *qs);
 int space_count(char *str, char *delimiter);
 
 
