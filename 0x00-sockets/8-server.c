@@ -57,7 +57,7 @@ void replyToClient(int sock_fd, char *msg)
 void printOutput(ll_tdnode **tdhead, int sock_fd, char *client_ip, char *buffer)
 {
 	char **line, **http_info, *path, *dataString, *headerString, *json;
-	ll_node *headerList;
+	ll_node *headerList = NULL;
 	size_t jsonLen = 0;
 
 	line = ndsplitter(buffer, "\n");
@@ -91,7 +91,6 @@ void printOutput(ll_tdnode **tdhead, int sock_fd, char *client_ip, char *buffer)
 		jsonifyList(json, jsonLen + 1, lastTDNode(tdhead));
 		generateAndSendResponse(sock_fd, 201, jsonLen, json);
 	}
-	headerList = NULL;
 	free(line), free(http_info), free(path), free(headerString);
 	headerString = NULL;
 }
