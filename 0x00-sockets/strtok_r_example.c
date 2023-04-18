@@ -54,17 +54,17 @@ int main(int argc, char *argv[])
 	}
 
 	for (j = 1, str1 = argv[1]; ; j++, str1 = NULL) {
-		token = strtok_r(str1, "\r\n", &saveptr1);
+		token = strtok_r(str1, "\n", &saveptr1);
 		if (token == NULL)
 			break;
 		if (char_occurrences(token, ':') > 1)
-			sub_char = sub_after_one(token, ':');
+			sub_char = sub_after_one(token, '=');
 		for (str2 = token, step = 0; ; str2 = NULL, step++) {
-			subtoken = strtok_r(str2, ":", &saveptr2);
+			subtoken = strtok_r(str2, "=", &saveptr2);
 			if (subtoken == NULL)
 				break;
 			if (strchr(subtoken, sub_char))
-				replace_chars(subtoken, sub_char, ':');
+				replace_chars(subtoken, sub_char, '=');
 			if (step == 0)
 				key = subtoken;
 			else

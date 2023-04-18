@@ -17,15 +17,18 @@ char *trimSpaces(char *string)
 
 	length = strlen(string);
 
-	for (; string[pos] == ' '; pos++);
+	for (; string[pos] == ' '; pos++)
+		;
 
-	for (; pos < length; string[swap++] = string[pos++]);
+	for (; pos < length; string[swap++] = string[pos++])
+		;
 
 	string[swap] = '\0';
 	length = strlen(string);
 	pos = length - 1;
 
-	for (; string[pos] == ' '; pos--);
+	for (; string[pos] == ' '; pos--)
+		;
 
 	string[pos + 1] = '\0';
 

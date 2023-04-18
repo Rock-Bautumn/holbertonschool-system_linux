@@ -13,18 +13,6 @@
 /* set the maximum number of connections that can wait to be connected */
 #define MAX_BACKLOG 32
 
-#define HTTP_OK "HTTP/1.1 200 OK\r\n\r\n"
-
-/**
- * ErrorAndDie - Print an error message with perror and exit with failure
- * @string: The error message to print with perror
- * Return: void
-*/
-void ErrorAndDie(char *string)
-{
-	perror(string);
-	exit(EXIT_FAILURE);
-}
 
 /**
  * create_socket - Creates a configured TCP/IP socket file descriptor
@@ -76,9 +64,9 @@ void printOutput(char *buffer)
  * Return: void
 */
 
-void replyToClient(int sock_fd)
+void replyToClient(int sock_fd, char *msg)
 {
-	send(sock_fd, HTTP_OK, strlen(HTTP_OK), MSG_NOSIGNAL);
+	send(sock_fd, msg, strlen(msg), MSG_NOSIGNAL);
 }
 
 /**
@@ -114,7 +102,7 @@ int main(void)
 		if (valread == -1)
 			ErrorAndDie("Unable to read socket data from client");
 		printOutput(buffer);
-		replyToClient(new_sock_fd);
+		replyToClient(new_sock_fd, HTTP_OK_R);
 		fflush(stdout);
 		close(new_sock_fd);
 	}

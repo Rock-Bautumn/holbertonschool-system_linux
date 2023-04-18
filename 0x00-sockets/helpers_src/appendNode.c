@@ -19,6 +19,7 @@ void appendNode(ll_node **head, char *key, char *value)
 
 	if (*head == NULL)
 	{
+		newNode->id = 0;
 		*head = newNode;
 		return;
 	}
@@ -27,5 +28,6 @@ void appendNode(ll_node **head, char *key, char *value)
 	{
 		lastNode = lastNode->next;
 	}
+	newNode->id = lastNode->id + 1;
 	lastNode->next = newNode;
 }

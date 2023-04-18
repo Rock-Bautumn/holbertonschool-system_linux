@@ -17,13 +17,15 @@ ll_node *parseHeaderString(ll_node **head, char *hs)
 	if (hs == NULL)
 		return (NULL);
 
-	for (j = 1, str1 = hs; ; j++, str1 = NULL) {
+	for (j = 1, str1 = hs; ; j++, str1 = NULL)
+	{
 		token = strtok_r(str1, "\r\n", &saveptr1);
 		if (token == NULL)
 			break;
 		if (char_occurrences(token, ':') > 1)
 			sub_char = sub_after_one(token, ':');
-		for (str2 = token, step = 0; ; str2 = NULL, step++) {
+		for (str2 = token, step = 0; ; str2 = NULL, step++)
+		{
 			subtoken = strtok_r(str2, ":", &saveptr2);
 			if (subtoken == NULL)
 				break;
