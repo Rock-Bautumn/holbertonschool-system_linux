@@ -1,6 +1,5 @@
 #include "server.h"
 
-
 /* port 0 means any port the OS chooses */
 #define PORT 8080
 
@@ -65,8 +64,8 @@ void printOutput(ll_tdnode **tdhead, int sock_fd, char *client_ip, char *buffer)
 	path = extractPathAsCopy(line[0]);
 	printf("%s %s %s -> ", client_ip, http_info[0], path);
 	if (strcmp(path, "/todos") != 0 ||
-		(strcmp(http_info[0], "POST") != 0 &&
-			 strncmp(http_info[0], "GET", 3) != 0))
+	    (strcmp(http_info[0], "POST") != 0 &&
+	     strncmp(http_info[0], "GET", 3) != 0))
 	{
 		httpToClient(sock_fd, 404);
 		return;

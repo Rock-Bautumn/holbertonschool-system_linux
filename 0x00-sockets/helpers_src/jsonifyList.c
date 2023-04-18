@@ -7,8 +7,10 @@ size_t jsonifyList(char *json, size_t jsonLen, ll_tdnode *tdhead)
 	ll_tdnode *t_n = tdhead;
 	int node_iterations = 1;
 
+	
 	if (tdhead == NULL)
-		strncpy(json, "[]", jsonLen);
+		strncpy(json, "", 1);
+	
 	for (; t_n; t_n = t_n->next, node_iterations++)
 	{
 		if (t_n->next && node_iterations == 1)
