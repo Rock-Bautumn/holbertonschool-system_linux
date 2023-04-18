@@ -7,6 +7,9 @@ size_t jsonLength(ll_tdnode *head)
 	/* char buff[5000]; */
 	int node_iterations = 1;
 
+	if (head == NULL)
+		return (2);
+
 	while (t_n != NULL)
 	{
 		if (t_n->next && node_iterations == 1)
